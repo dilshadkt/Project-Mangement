@@ -2,6 +2,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Image from "next/image";
 import React from "react";
 import BannerSection from "./banner-section";
+import Link from "next/link";
 
 const GetStartSection = () => {
   return (
@@ -17,10 +18,10 @@ const GetStartSection = () => {
           </p>
           <PrimaryButton text="Get started" />
           <div className="medium-14 text-textGray w-full flex justify-center my-4">
-            <p className="cursor-pointer w-fit">
+            <Link href={"/auth/login"} className="cursor-pointer w-fit">
               {" "}
               Already have an account? sign in
-            </p>
+            </Link>
           </div>
         </div>
       </div>
