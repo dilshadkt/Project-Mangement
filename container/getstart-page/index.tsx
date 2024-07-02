@@ -1,21 +1,12 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Image from "next/image";
 import React from "react";
+import BannerSection from "./banner-section";
 
 const GetStartSection = () => {
   return (
     <section className="w-full h-screen p-5 grid grid-cols-2">
-      <div className="w-full bg-gray-900 h-full text-red-300 rounded-xl flexCenter relative">
-        <h4 className="absolute top-0 left-0 text-white font-semibold m-5  text-2xl">
-          Organic <br /> Mind
-        </h4>
-        <Image
-          src={"/images/getstart.png"}
-          alt="get-start"
-          width={350}
-          height={350}
-        />
-      </div>
+      <BannerSection />
       <div className="w-full h-full flexCenter">
         <div className="max-w-[70%] 2xl:max-w-[450px] flex flex-col">
           <h5 className="bold-38 text-gray-900">Productive Mind</h5>

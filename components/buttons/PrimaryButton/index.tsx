@@ -11,7 +11,7 @@ const PrimaryButton = ({
   return (
     <button
       onClick={onClick}
-      className={`bg-primaryColor flexCenter p-2 md:p-3 rounded-xl  text-sm font-medium text-textGray  `}
+      className={`bg-primaryColor flexCenter p-2 md:p-3 md:py-4 rounded-xl  text-sm font-medium text-textGray ${className} `}
     >
       {text}
     </button>
