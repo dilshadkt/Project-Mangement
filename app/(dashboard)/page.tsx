@@ -1,3 +1,9 @@
+import TodaySection from "@/container/dashboard-page/today-section";
+
 export default function Home() {
-  return <main className="text-red-500"></main>;
+  return (
+    <main className=" px-5 py-2">
+      <TodaySection />
+    </main>
+  );
 }
