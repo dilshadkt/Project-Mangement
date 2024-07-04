@@ -9,7 +9,7 @@ const DashboardLayout = ({
   return (
     <div className="p-5 w-full h-screen flex ">
       <Sidbar />
-      <div className="w-full  ">{children}</div>
+      <div className="w-full  pl-5 py-2  ">{children}</div>
     </div>
   );
 };

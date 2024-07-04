@@ -15,7 +15,7 @@ export const sideBar = [
     id: 2,
     title: "Today",
     icon: FormatListBulletedIcon,
-    path: "/Today",
+    path: "/",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const sideBar = [
     id: 4,
     title: "Stick Wall",
     icon: NoteIcon,
-    path: "/upcoming",
+    path: "/stick-wall",
   },
   {
     id: 5,

@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { sideBar } from "./constant";
+import Link from "next/link";
+import Image from "next/image";
 const Sidbar = () => {
   const [sideBarOpen, setSideBarOpen] = useState(true);
   return (
@@ -28,18 +30,27 @@ const Sidbar = () => {
             <div>
               <ul className="my-2 mb-3">
                 {sideBar.slice(0, 4).map((item) => (
-                  <li
-                    key={item.id}
-                    className="flexBetween cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] px-2 rounded-lg"
-                  >
-                    <div>
-                      <item.icon className="opacity-70 w-5" />
-                      <span className="ml-3 ">{item.title}</span>
-                    </div>
-                    <span className="px-2  bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
-                      12
-                    </span>
-                  </li>
+                  <Link href={item.path} key={item.id}>
+                    <li
+                      key={item.id}
+                      className="relative overflow-hidden  group flexBetween hover:shadow-md cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] px-2 rounded-lg"
+                    >
+                      <Image
+                        src={"/images/paper.jpg"}
+                        alt="wall texture"
+                        width={200}
+                        height={30}
+                        className="absolute w-full h-full object-cover opacity-0 group-hover:opacity-60 scale-x-125"
+                      />
+                      <div className="relative z-30">
+                        <item.icon className="opacity-70 w-5" />
+                        <span className="ml-3 ">{item.title}</span>
+                      </div>
+                      <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
+                        12
+                      </span>
+                    </li>
+                  </Link>
                 ))}
               </ul>
               <hr />
