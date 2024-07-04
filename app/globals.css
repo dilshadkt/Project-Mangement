@@ -17,6 +17,10 @@
 }
 
 body {
+  /* padding: 0;
+  margin: 0;
+
+  box-sizing: border-box; */
 }
 
 @layer utilities {
@@ -95,6 +99,9 @@ body {
 
   .medium-14 {
     @apply text-[14px] font-[600];
+  }
+  .medium-18 {
+    @apply text-[18px] font-[600];
   }
   .medium-40 {
     @apply text-[40px] font-[600] leading-[120%];

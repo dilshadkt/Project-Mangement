@@ -4,7 +4,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { sideBar } from "./constant";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 const Sidbar = () => {
+  const pathName = usePathname();
+
   const [sideBarOpen, setSideBarOpen] = useState(true);
   return (
     <>
@@ -33,14 +36,18 @@ const Sidbar = () => {
                   <Link href={item.path} key={item.id}>
                     <li
                       key={item.id}
-                      className="relative overflow-hidden  group flexBetween hover:shadow-md cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] px-2 rounded-lg"
+                      className={`relative overflow-hidden my-1  group flexBetween hover:shadow-md cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] ${
+                        pathName === item.path && `bg-[#EBEBEB]`
+                      } px-2 rounded-lg`}
                     >
                       <Image
                         src={"/images/paper.jpg"}
                         alt="wall texture"
                         width={200}
                         height={30}
-                        className="absolute w-full h-full object-cover opacity-0 group-hover:opacity-60 scale-x-125"
+                        className={`absolute w-full h-full object-cover opacity-0 group-hover:opacity-60 ${
+                          pathName === item.path && `opacity-60`
+                        } scale-x-125`}
                       />
                       <div className="relative z-30">
                         <item.icon className="opacity-70 w-5" />

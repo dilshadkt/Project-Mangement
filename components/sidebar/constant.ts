@@ -21,7 +21,7 @@ export const sideBar = [
     id: 3,
     title: "Calender",
     icon: CalendarMonthIcon,
-    path: "/Calender",
+    path: "/calender",
   },
   {
     id: 4,

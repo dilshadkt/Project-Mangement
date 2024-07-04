@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const StickPaper = ({
+const AddPaper = ({
   title,
   id,
   image,
@@ -14,7 +14,7 @@ const StickPaper = ({
     <div
       id={id}
       className="bg-[#f2d948] max-h-[400px]   min-h-[350px] shadow-lg rotate-2 z-30
- origin-top-left transition-all duration-200 cursor-grab p-4 pt-6 hover:rotate-0 overflow-hidden rounded-md  relative"
+origin-top-left transition-all duration-200 cursor-pointer group p-4 pt-6 hover:rotate-0 overflow-hidden rounded-md  relative"
     >
       {/* TEXTURE IMAGE  */}
       <Image
@@ -34,12 +34,23 @@ const StickPaper = ({
         />
       )}
 
-      <div className="relative z-50">
-        <h4 className="medium-18 text-gray-700">{title}</h4>
+      <div className="relative z-50 w-full h-full flexCenter flex-col opacity-65">
+        <label htmlFor="drawer" className=" w-full h-full flexCenter flex-col ">
+          <Image
+            src={"/svg/list.svg"}
+            alt="list"
+            width={60}
+            height={60}
+            className="opacity-60 "
+          />
+          <p className="mt-5 medium-16 text-gray-600 font-medium ">
+            Create your stick
+          </p>
+        </label>
       </div>
       <div className="w-2 h-2 absolute top-2 left-2 rounded-full bg-gradient-to-r from-black to-gray-300 shadow-2xl border-[0.2px] border-gray-300/90"></div>
     </div>
   );
 };
 
-export default StickPaper;
+export default AddPaper;
