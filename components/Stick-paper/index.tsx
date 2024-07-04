@@ -5,10 +5,12 @@ const StickPaper = ({
   title,
   id,
   image,
+  desc,
 }: {
   title: string;
   id?: string;
   image?: any;
+  desc?: any;
 }) => {
   return (
     <div
@@ -36,6 +38,7 @@ const StickPaper = ({
 
       <div className="relative z-50">
         <h4 className="medium-18 text-gray-700">{title}</h4>
+        {desc && <p className="mt-3 text-textGray">{desc}</p>}
       </div>
       <div className="w-2 h-2 absolute top-2 left-2 rounded-full bg-gradient-to-r from-black to-gray-300 shadow-2xl border-[0.2px] border-gray-300/90"></div>
     </div>

@@ -1,10 +1,13 @@
 "use client";
 import Drawyer from "@/components/drawyer";
-import React, { useState } from "react";
-import ReactQuill from "react-quill";
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import "./index.css";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 const AddStick = () => {
   const [value, setValue] = useState<any>();
 
@@ -12,7 +15,7 @@ const AddStick = () => {
     <Drawyer
       id="drawer"
       position="drawer-end"
-      className="w-[500px]  flexCenter px-5"
+      className="w-[500px] flexCenter px-5"
     >
       <form action="" className="w-full flex flex-col relative z-40 ">
         <label htmlFor="title" className="regular-20 mb-2 text-textGray">
@@ -21,7 +24,7 @@ const AddStick = () => {
         <input
           type="text"
           placeholder="Enter the title"
-          className="p-3 rounded-lg border border-gray-300  bg-transparent outline-none my-2"
+          className="p-3 rounded-lg border border-gray-300 bg-transparent outline-none my-2"
         />
         <div className="min-h-[300px] ">
           <ReactQuill

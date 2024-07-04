@@ -7,8 +7,16 @@ import { animations } from "@formkit/drag-and-drop";
 import AddPaper from "@/components/Stick-paper/add-paper/AddPaper";
 import Drawyer from "@/components/drawyer";
 const StickWallSection = () => {
-  const [parent, tapes] = useDragAndDrop<HTMLDivElement, string>(
-    ["Depeche Mode", "Duran Duran", "Pet Shop Boys", "Kraftwerk"],
+  const [parent, tapes] = useDragAndDrop<HTMLDivElement, any>(
+    [
+      {
+        title: "Depeche Mode",
+        desc: "Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden ber",
+      },
+      { title: "Duran Duran" },
+      { title: "Pet Shop Boys" },
+      { title: "Kraftwerk" },
+    ],
     {
       plugins: [animations()],
       draggable: (el) => {
@@ -23,7 +31,7 @@ const StickWallSection = () => {
         className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-3 2xl:grid-cols-4 gap-5  p-5"
       >
         {tapes.map((item) => (
-          <StickPaper title={item} key={item} />
+          <StickPaper title={item.title} desc={item?.desc} key={item.title} />
         ))}
         <AddPaper title={"item"} id="no-drag" />
       </div>

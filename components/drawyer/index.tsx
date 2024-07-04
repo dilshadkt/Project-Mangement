@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 interface DrawyerProps {
@@ -7,7 +8,12 @@ interface DrawyerProps {
   className?: string;
 }
 
-const Drawyer = ({ position, id, children, className }: DrawyerProps) => {
+const Drawyer = ({
+  position = "drawer-end",
+  id = "",
+  children,
+  className,
+}: DrawyerProps) => {
   return (
     <div className={`drawer  ${position} z-[1000]   `}>
       <input id={id} type="checkbox" className="drawer-toggle" />
