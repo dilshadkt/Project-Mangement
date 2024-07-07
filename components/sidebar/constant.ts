@@ -33,7 +33,7 @@ export const sideBar = [
     id: 5,
     title: "Settings",
     icon: TuneIcon,
-    path: "/Settings",
+    path: "/settings",
   },
   {
     id: 6,
@@ -42,3 +42,46 @@ export const sideBar = [
     path: "/signout",
   },
 ];
+
+export const authFormDetails = {
+  signin: [
+    {
+      id: 1,
+      type: "email",
+      placeholder: "Email",
+      name: "email",
+    },
+    {
+      id: 2,
+      type: "password",
+      placeholder: "Passwrod",
+      name: "password",
+    },
+  ],
+  signup: [
+    {
+      id: 1,
+      type: "text",
+      placeholder: "First Name",
+      name: "firstName",
+    },
+    {
+      id: 2,
+      type: "text",
+      placeholder: "Last Name",
+      name: "lastName",
+    },
+    {
+      id: 3,
+      type: "email",
+      placeholder: "Email",
+      name: "email",
+    },
+    {
+      id: 4,
+      type: "password",
+      placeholder: "Password",
+      name: "password",
+    },
+  ],
+};

@@ -1,12 +1,12 @@
 import AuthSection from "@/container/auth-page/login-page";
 import React from "react";
 
-const Login = () => {
+const Register = () => {
   return (
     <main>
-      <AuthSection />
+      <AuthSection type="register" />
     </main>
   );
 };
 
-export default Login;
+export default Register;

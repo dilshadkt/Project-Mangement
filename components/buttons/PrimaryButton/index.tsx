@@ -7,13 +7,17 @@ const PrimaryButton = ({
   className,
   onClick,
   type = "button",
+  loading,
 }: PrimaryButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`bg-primaryColor hover:bg-primaryColor/90 flexCenter p-2 md:p-3 md:py-4 rounded-xl  text-sm font-medium text-textGray ${className} `}
+      disabled={loading}
+      className={`bg-primaryColor  ${
+        loading ? "bg-gray-300 animate-pulse" : "hover:bg-primaryColor/90"
+      }  flexCenter p-2 md:p-3 md:py-4 rounded-xl  text-sm font-medium text-textGray ${className} `}
     >
-      {text}
+      {loading ? `${text}` : text}
     </button>
   );
 };

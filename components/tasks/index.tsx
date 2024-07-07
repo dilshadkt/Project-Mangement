@@ -46,6 +46,7 @@ const Tasks = ({
             type="text"
             className="p-3 border border-gray-200 my-1 text-textGray/80 rounded-lg bg-transparent outline-none w-full"
             value={"Renew drving licence"}
+            onChange={() => null}
           />
           <textarea
             className="p-3 border min-h-28 border-gray-200 my-1 text-textGray/80  placeholder-textGray/80 rounded-lg bg-transparent outline-none w-full"

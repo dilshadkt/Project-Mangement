@@ -14,6 +14,8 @@ const Sidbar = () => {
     if (item.title === "Sign Out") {
       Cookies.remove("token");
       navigate.replace("/auth/login");
+    } else {
+      navigate.push(item.path);
     }
   };
   return (

@@ -3,4 +3,5 @@ export type PrimaryButtonProps = {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
+  loading?: boolean;
 };
