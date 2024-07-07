@@ -5,10 +5,17 @@ import { sideBar } from "./constant";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 const Sidbar = () => {
   const pathName = usePathname();
-
   const [sideBarOpen, setSideBarOpen] = useState(true);
+  const navigate = useRouter();
+  const logout = (item: any) => {
+    if (item.title === "Sign Out") {
+      Cookies.remove("token");
+      navigate.replace("/auth/login");
+    }
+  };
   return (
     <>
       <section
@@ -65,6 +72,7 @@ const Sidbar = () => {
             <ul className="mt-2">
               {sideBar.slice(4).map((item) => (
                 <li
+                  onClick={() => logout(item)}
                   key={item.id}
                   className="flexBetween cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] px-2 rounded-lg"
                 >
