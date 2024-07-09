@@ -1,41 +1,39 @@
 "use client";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { authFormDetails } from "@/components/sidebar/constant";
-import { login, signup } from "@/services/authService";
-import Cookies from "js-cookie";
+import { loginUser } from "@/libs/features/user/action";
+import { AppDispatch, RootState } from "@/libs/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 const AuthForm = ({ authType }: { authType?: string }) => {
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  const user = useSelector((store: RootState) => store.user);
+
+  useEffect(() => {
+    if (user.logged) {
+      router.replace("/");
+    }
+  }, [user.logged, router]);
 
   // REGISTER USER
   const clientAction = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
-    setError(null);
     const formData = new FormData(event.currentTarget);
-    const userDetails = Object.fromEntries(formData);
-    try {
-      const res: any =
-        authType === "register"
-          ? await signup(userDetails)
-          : await login(userDetails);
-      Cookies.set("token", res.token);
-      navigate.replace("/");
-    } catch (error: any) {
-      setError(error?.response?.data?.error);
-    } finally {
-      setLoading(false);
-    }
+    const userDetails = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    };
+
+    dispatch(loginUser(userDetails));
   };
 
   return (
     <>
       <h4 className="my-4 bold-38  ">
-        {authType === "register" ? "Sign up" : " Sign in"}
+        {authType === "register" ? "Sign up" : " Sign in"} {user.userData.name}
       </h4>
       <form className="w-full" onSubmit={clientAction}>
         {authFormDetails[authType === "register" ? "signup" : "signin"].map(
@@ -51,10 +49,11 @@ const AuthForm = ({ authType }: { authType?: string }) => {
           )
         )}
 
-        {error && <p className="text-xs mt-1  text-red-500">{error}</p>}
+        {user.error && (
+          <p className="text-xs mt-1  text-red-500">{user.error}</p>
+        )}
         <PrimaryButton
           type="submit"
-          loading={loading}
           text={authType === "register" ? "Log in" : "Sign in"}
           className="w-full my-4"
         />

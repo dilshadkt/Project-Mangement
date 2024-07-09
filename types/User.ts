@@ -19,4 +19,5 @@ export type UserState = {
   loading: boolean;
   fetchError: string | undefined;
   error: string | null;
+  logged: boolean;
 };

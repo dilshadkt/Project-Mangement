@@ -6,13 +6,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/libs/store";
+import { logout } from "@/libs/features/user/userSlice";
 const Sidbar = () => {
   const pathName = usePathname();
   const [sideBarOpen, setSideBarOpen] = useState(true);
+  const user = useSelector((store: RootState) => store.user);
+  const dispatch = useDispatch();
   const navigate = useRouter();
-  const logout = (item: any) => {
+  const logoutUser = (item: any) => {
     if (item.title === "Sign Out") {
-      Cookies.remove("token");
+      dispatch(logout());
       navigate.replace("/auth/login");
     } else {
       navigate.push(item.path);
@@ -74,7 +79,7 @@ const Sidbar = () => {
             <ul className="mt-2">
               {sideBar.slice(4).map((item) => (
                 <li
-                  onClick={() => logout(item)}
+                  onClick={() => logoutUser(item)}
                   key={item.id}
                   className="flexBetween cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] px-2 rounded-lg"
                 >

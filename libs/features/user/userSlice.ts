@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser } from "./action";
 import { UserState } from "@/types/User";
+import Cookies from "js-cookie";
 
 const initialState: UserState = {
   userData: {
@@ -13,12 +14,18 @@ const initialState: UserState = {
   loading: false,
   fetchError: undefined,
   error: null,
+  logged: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.logged = false;
+      Cookies.remove("token");
+    },
+  },
   extraReducers: (builders) => {
     builders.addCase(loginUser.pending, (state) => {
       state.loading = true;
@@ -30,6 +37,8 @@ export const userSlice = createSlice({
       state.loading = false;
       state.fetchError = undefined;
       state.error = null;
+      state.logged = true;
+      Cookies.set("token", action.payload.token);
     });
     builders.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
@@ -41,3 +50,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { logout } = userSlice.actions;
