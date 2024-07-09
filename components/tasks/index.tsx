@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, useEffect, useRef, useState } from "react";
+import React, { Dispatch, FormEvent, useEffect, useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../buttons/PrimaryButton";
 const Tasks = ({
@@ -24,6 +24,7 @@ const Tasks = ({
     document.addEventListener("mousedown", handleClose);
     return () => document.removeEventListener("mousedown", handleClose);
   }, [taskBarRef]);
+
   return (
     <div
       ref={taskBarRef}
@@ -40,7 +41,7 @@ const Tasks = ({
           <CloseIcon className="cursor-pointer font-bold w-4" />
         </span>
       </nav>
-      <form className="flex justify-between flex-col h-full  ">
+      <form className="flex justify-between flex-col h-full ">
         <div>
           <input
             type="text"

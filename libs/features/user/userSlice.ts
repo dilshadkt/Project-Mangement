@@ -4,6 +4,7 @@ import { loginUser, signInUser } from "./action";
 import { UserState } from "@/types/User";
 import Cookies from "js-cookie";
 import { DefaulUserData } from "./constant";
+import setToken from "@/utils/token";
 
 const initialState: UserState = {
   userData: DefaulUserData,
@@ -35,6 +36,7 @@ export const userSlice = createSlice({
       state.fetchError = undefined;
       state.error = null;
       state.logged = true;
+      setToken(action.payload.token);
       Cookies.set("token", action.payload.token);
     });
     builders.addCase(loginUser.rejected, (state, action) => {
@@ -57,6 +59,7 @@ export const userSlice = createSlice({
       state.fetchError = undefined;
       state.error = null;
       state.logged = true;
+      setToken("action.payload.token");
       Cookies.set("token", action.payload.token);
     });
     builders.addCase(signInUser.rejected, (state, action) => {
