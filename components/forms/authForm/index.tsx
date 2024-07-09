@@ -1,7 +1,7 @@
 "use client";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { authFormDetails } from "@/components/sidebar/constant";
-import { loginUser } from "@/libs/features/user/action";
+import { loginUser, signInUser } from "@/libs/features/user/action";
 import { AppDispatch, RootState } from "@/libs/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,18 +22,17 @@ const AuthForm = ({ authType }: { authType?: string }) => {
   const clientAction = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const userDetails = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-    };
+    const userDetails = Object.fromEntries(formData);
 
-    dispatch(loginUser(userDetails));
+    authType === "register"
+      ? dispatch(signInUser(userDetails))
+      : dispatch(loginUser(userDetails));
   };
 
   return (
     <>
       <h4 className="my-4 bold-38  ">
-        {authType === "register" ? "Sign up" : " Sign in"} {user.userData.name}
+        {authType === "register" ? "Sign up" : " Sign in"}
       </h4>
       <form className="w-full" onSubmit={clientAction}>
         {authFormDetails[authType === "register" ? "signup" : "signin"].map(

@@ -16,7 +16,7 @@ interface SignInUserData {
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async (userData: LoginUserData, thunkAPI) => {
+  async (userData: any, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/auth/login`, userData);
       return response.data;
@@ -30,9 +30,9 @@ export const loginUser = createAsyncThunk(
 
 export const signInUser = createAsyncThunk(
   "user/signInUser",
-  async (userData: SignInUserData, thunkAPI) => {
+  async (userData: any, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
+      const response = await axios.post(`${API_URL}auth/register`, userData);
       return response.data;
     } catch (error: any) {
       const customError =
