@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { lexendDex } from "@/libs/fonts";
 import "./globals.css";
+import StoreProvider from "@/libs/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Organic Mind",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={lexendDex.className}>{children}</body>
+      <body className={lexendDex.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }

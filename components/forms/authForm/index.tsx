@@ -39,7 +39,7 @@ const AuthForm = ({ authType }: { authType?: string }) => {
       </h4>
       <form className="w-full" onSubmit={clientAction}>
         {authFormDetails[authType === "register" ? "signup" : "signin"].map(
-          (item, index) => (
+          (item) => (
             <input
               key={item.id}
               type={item.type}
@@ -58,34 +58,32 @@ const AuthForm = ({ authType }: { authType?: string }) => {
           text={authType === "register" ? "Log in" : "Sign in"}
           className="w-full my-4"
         />
-        <div className="mt-8 relative">
-          <span className="absolute top-0 bottom-0  bg-white text-textGray w-16 h-7 left-0 right-0 m-auto flexCenter">
-            or
-          </span>
-          <hr />
-        </div>
-        <div className="flexBetween gap-6 mt-6">
-          <PrimaryButton
-            text="Google"
-            className="w-full bg-gray-200 font-medium"
-          />
-          <PrimaryButton
-            text="facebook"
-            className="w-full bg-gray-200 font-medium"
-          />
-        </div>
-        <div className="medium-14 text-textGray w-full flex justify-center my-4">
-          <Link
-            href={authType === "register" ? "/auth/login" : "/auth/register"}
-          >
-            <p className="cursor-pointer w-fit">
-              {authType === "register"
-                ? "Already have an account? Sign in"
-                : "  Don't have an account? Sing up"}
-            </p>
-          </Link>
-        </div>
       </form>
+      <div className="mt-4 relative">
+        <span className="absolute top-0 bottom-0  bg-white text-textGray w-16 h-7 left-0 right-0 m-auto flexCenter">
+          or
+        </span>
+        <hr />
+      </div>
+      <div className="flexBetween gap-6 mt-6">
+        <PrimaryButton
+          text="Google"
+          className="w-full bg-gray-200 font-medium"
+        />
+        <PrimaryButton
+          text="facebook"
+          className="w-full bg-gray-200 font-medium"
+        />
+      </div>
+      <div className="medium-14 text-textGray w-full flex justify-center my-4">
+        <Link href={authType === "register" ? "/auth/login" : "/auth/register"}>
+          <p className="cursor-pointer w-fit">
+            {authType === "register"
+              ? "Already have an account? Sign in"
+              : "  Don't have an account? Sing up"}
+          </p>
+        </Link>
+      </div>
     </>
   );
 };
