@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.21",
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
+    "dompurify": "^3.1.6",
     "js-cookie": "^3.0.5",
     "next": "14.2.4",
     "react": "^18",
@@ -25,6 +26,7 @@
     "sonner": "^1.5.0"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",

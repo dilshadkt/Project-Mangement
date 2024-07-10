@@ -8,9 +8,10 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import axios from "axios";
 import { API_URL } from "@/constants";
 import setToken from "@/utils/token";
-import { createStick } from "@/libs/features/stick/stickSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppStore, RootState } from "@/libs/store";
+import { createStick } from "@/libs/features/stick/action";
+import { setError } from "@/libs/features/stick/stickSlice";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -34,9 +35,7 @@ const AddStick = () => {
     };
     dispatch(createStick(stickDetails));
   };
-  useEffect(() => {
-    closeDrawer();
-  }, [success]);
+
   return (
     <Drawyer
       id="drawer"
@@ -50,10 +49,10 @@ const AddStick = () => {
         <label htmlFor="title" className="regular-20 mb-2 text-textGray">
           Title
         </label>
-        {stick.loading ? <h1>loading...</h1> : null}
         <input
           type="text"
           name="title"
+          required
           placeholder="Enter the title"
           className="p-3 rounded-lg border border-gray-300 bg-transparent outline-none my-2"
         />
@@ -66,6 +65,7 @@ const AddStick = () => {
             className="custom-quill "
           />
         </div>
+        <p className="text-xs text-red-500 my-2">{stick.error}</p>
         <div>
           <PrimaryButton type="submit" text="Add" className="w-full" />
         </div>
