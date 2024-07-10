@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from "@/libs/store";
 import { getSticks } from "@/libs/features/stick/action";
 import Modal from "@/components/modal";
 import setToken from "@/utils/token";
+import { nanoid } from "nanoid";
 const StickWallSection = () => {
   const dispatch = useDispatch<AppDispatch>();
   const sticks = useSelector((store: RootState) => store.stick.stick);
@@ -35,7 +36,9 @@ const StickWallSection = () => {
         className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-3 2xl:grid-cols-4 gap-5  p-5"
       >
         {loading
-          ? new Array(7).fill("  ").map(() => <StickPaper title="" />)
+          ? new Array(7)
+              .fill("  ")
+              .map((index) => <StickPaper key={nanoid()} title="" />)
           : tapes.map((item) => (
               <StickPaper
                 setSelectedStick={setSelectedStick}

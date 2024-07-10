@@ -21,6 +21,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.logged = false;
       Cookies.remove("token");
+      localStorage.removeItem("token");
     },
   },
   extraReducers: (builders) => {
@@ -36,7 +37,8 @@ export const userSlice = createSlice({
       state.fetchError = undefined;
       state.error = null;
       state.logged = true;
-      setToken(action.payload.token);
+      localStorage.setItem("token", action.payload.token);
+      // setToken(action.payload.token);
       Cookies.set("token", action.payload.token);
     });
     builders.addCase(loginUser.rejected, (state, action) => {
@@ -59,7 +61,8 @@ export const userSlice = createSlice({
       state.fetchError = undefined;
       state.error = null;
       state.logged = true;
-      setToken("action.payload.token");
+      localStorage.setItem("token", action.payload.token);
+      // setToken(action.payload.token);
       Cookies.set("token", action.payload.token);
     });
     builders.addCase(signInUser.rejected, (state, action) => {

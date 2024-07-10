@@ -33,6 +33,7 @@ const AddStick = () => {
       title: formData.get("title"),
       desc: value,
     };
+
     dispatch(createStick(stickDetails));
   };
 

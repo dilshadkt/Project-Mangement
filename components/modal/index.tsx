@@ -1,13 +1,18 @@
 "use client";
-import { setSticks } from "@/libs/features/stick/stickSlice";
+import { editSticks, setSticks } from "@/libs/features/stick/stickSlice";
 import { AppDispatch, RootState } from "@/libs/store";
-import { deleteStick } from "@/services/stickService";
+import { deleteStick, saveChanges } from "@/services/stickService";
 import DOMPurify from "dompurify";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { useDispatch, useSelector } from "react-redux";
+
+interface StickData {
+  title?: string;
+  desc?: string;
+}
 
 const Modal = ({ stickId }: { stickId: string }) => {
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
@@ -48,6 +53,25 @@ const Modal = ({ stickId }: { stickId: string }) => {
       .catch(() => dispatch(setSticks(backeUp)));
   };
 
+  const saveEdit = () => {
+    const dataTochange: StickData = {};
+    if (inputTitle !== activeStick.title) {
+      dataTochange.title = inputTitle;
+    }
+    if (value !== activeStick.desc) {
+      dataTochange.desc = value;
+    }
+    if (Object.keys(dataTochange).length > 0) {
+      saveChanges(stickId, dataTochange).then((res) =>
+        // {  console.log(res)
+        // console.log(stickId)}
+        {
+          dispatch(editSticks({ id: stickId, stick: res }));
+        }
+      );
+    }
+  };
+
   // SETTING THE INTIAL VALUE
   useEffect(() => {
     setInpuTitle(activeStick.title);
@@ -81,15 +105,28 @@ const Modal = ({ stickId }: { stickId: string }) => {
           className="absolute opacity-20 -left-5 z-50 bottom-0"
         /> */}
         <div className="absolute bottom-5 right-5 z-50">
-          <button title="Edit" className="mr-2" onClick={() => enbaleEdit()}>
-            <Image
-              src={"/images/pencil.png"}
-              alt="cancel"
-              width={36}
-              height={36}
-              className="opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-300"
-            />
-          </button>
+          {!edit ? (
+            <button title="Save" className="mr-2" onClick={() => saveEdit()}>
+              <Image
+                src={"/images/tick.png"}
+                alt="cancel"
+                width={36}
+                height={36}
+                className="opacity-40 hover:opacity-100 hover:scale-110 transition-all duration-300"
+              />
+            </button>
+          ) : (
+            <button title="Edit" className="mr-2" onClick={() => enbaleEdit()}>
+              <Image
+                src={"/images/pencil.png"}
+                alt="cancel"
+                width={36}
+                height={36}
+                className="opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-300"
+              />
+            </button>
+          )}
+
           <button title="delete" onClick={handleDelete}>
             <Image
               src={"/images/trash.png"}
@@ -114,6 +151,7 @@ const Modal = ({ stickId }: { stickId: string }) => {
             ref={titleRef}
             type="text"
             value={inputTitle}
+            onChange={(e) => setInpuTitle(e.target.value)}
             // disabled={edit}
             readOnly={edit}
             placeholder={title}

@@ -29,6 +29,11 @@ const stickSlice = createSlice({
     setSticks: (state, action) => {
       state.stick.stiks = action.payload;
     },
+    editSticks: (state, action) => {
+      state.stick.stiks = state.stick.stiks.map((item) =>
+        item._id == action.payload.id ? action.payload.stick : item
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createStick.pending, (state) => {
@@ -62,4 +67,4 @@ const stickSlice = createSlice({
 });
 
 export default stickSlice.reducer;
-export const { setError, setSticks } = stickSlice.actions;
+export const { setError, setSticks, editSticks } = stickSlice.actions;

@@ -10,3 +10,14 @@ export const deleteStick = async (stickId: string) => {
     error;
   }
 };
+export const saveChanges = async (
+  stickId: string,
+  dataTochange: { title?: string; desc?: string }
+) => {
+  try {
+    const res = await axios.patch(`${API_URL}stick/${stickId}`, dataTochange);
+    return res.data.stick;
+  } catch (error) {
+    console.log(error);
+  }
+};
