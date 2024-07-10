@@ -1,14 +1,35 @@
 "use client";
 import { RootState } from "@/libs/store";
 import DOMPurify from "dompurify";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import { useSelector } from "react-redux";
 
 const Modal = ({ stickId }: { stickId: string }) => {
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
-  const activeStick = sticks.filter((stick) => stick._id === stickId)[0];
+  const activeStick = sticks.filter((stick) => stick._id === stickId)[0] || {
+    title: "",
+    desc: "",
+  };
+  const [edit, setEdit] = useState<boolean>(true);
   const { title, desc } = activeStick;
+  const titleRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState<string>("");
+  const [inputTitle, setInpuTitle] = useState<string>("");
+  const enbaleEdit = () => {
+    setEdit(false);
+    setTimeout(() => {
+      if (titleRef.current) {
+        titleRef.current.focus();
+      }
+    }, 0);
+  };
+  useEffect(() => {
+    setInpuTitle(activeStick.title);
+    setValue(activeStick.desc);
+  }, [activeStick]);
   return (
     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
       <div
@@ -29,8 +50,15 @@ const Modal = ({ stickId }: { stickId: string }) => {
           height={70}
           className="absolute  bottom-5 left-0  z-10 opacity-10"
         />
+        {/* <Image
+          src={"/images/fire.gif"}
+          alt="down"
+          width={70}
+          height={70}
+          className="absolute opacity-20 -left-5 z-50 bottom-0"
+        /> */}
         <div className="absolute bottom-5 right-5 z-50">
-          <button title="Edit" className="mr-2">
+          <button title="Edit" className="mr-2" onClick={() => enbaleEdit()}>
             <Image
               src={"/images/pencil.png"}
               alt="cancel"
@@ -57,22 +85,47 @@ const Modal = ({ stickId }: { stickId: string }) => {
           className="absolute w-full h-full top-0 object-cover left-0 right-0 bottom-0 opacity-50"
         />
         <div className="relative z-50">
-          <h4 className="medium-18 text-gray-700">{title}</h4>
+          {/* // CONTENTS ARE HERE 😂  */}
 
-          {desc && (
-            <div
-              className="mt-3 text-textGray"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(desc),
-              }}
-            ></div>
+          <input
+            ref={titleRef}
+            type="text"
+            value={inputTitle}
+            // disabled={edit}
+            readOnly={edit}
+            placeholder={title}
+            className="outline-none medium-18 text-gray-700 placeholder-gray-700 bg-transparent"
+          />
+          {!edit ? (
+            <div className="h-[70%]  mt-3 ">
+              <ReactQuill
+                theme="snow"
+                onChange={setValue}
+                value={value}
+                style={{ height: "200px", border: "none" }}
+                className="custom-quill "
+              />
+            </div>
+          ) : (
+            desc && (
+              <div
+                className="mt-3 text-textGray"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(desc),
+                }}
+              ></div>
+            )
           )}
         </div>
 
         <div className="modal-action p-0 absolute top-0 right-5 z-50">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="bg-transparent" title="cancel">
+            <button
+              className="bg-transparent"
+              title="cancel"
+              onClick={() => setEdit(true)}
+            >
               <Image
                 src={"/images/cancel.png"}
                 alt="cancel"

@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/header/Header";
 import StickWallSection from "@/container/dashboard-page/stickWall-section";
 import AddStick from "@/container/dashboard-page/stickWall-section/add-stick";

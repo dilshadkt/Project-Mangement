@@ -40,7 +40,7 @@ const StickWallSection = () => {
                 setSelectedStick={setSelectedStick}
                 title={item.title}
                 desc={item?.desc}
-                key={item.title}
+                key={item._id}
                 id={item._id}
               />
             ))}
