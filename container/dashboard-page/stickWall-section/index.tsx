@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/libs/store";
 import { getSticks } from "@/libs/features/stick/action";
 import Modal from "@/components/modal";
+import setToken from "@/utils/token";
 const StickWallSection = () => {
   const dispatch = useDispatch<AppDispatch>();
   const sticks = useSelector((store: RootState) => store.stick.stick);
@@ -24,9 +25,9 @@ const StickWallSection = () => {
     setTapes(sticks.stiks);
   }, [sticks]);
   useEffect(() => {
+    setToken(localStorage.getItem("token") as string);
     dispatch(getSticks(""));
   }, []);
-  console.log(selectedStick);
   return (
     <section className="relative mt-8 w-full h-full  border shadow-md rounded-xl border-gray-200  overflow-hidden ">
       <div

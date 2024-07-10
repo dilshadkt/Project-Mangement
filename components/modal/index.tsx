@@ -1,23 +1,28 @@
 "use client";
-import { RootState } from "@/libs/store";
+import { setSticks } from "@/libs/features/stick/stickSlice";
+import { AppDispatch, RootState } from "@/libs/store";
+import { deleteStick } from "@/services/stickService";
 import DOMPurify from "dompurify";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Modal = ({ stickId }: { stickId: string }) => {
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
   const activeStick = sticks.filter((stick) => stick._id === stickId)[0] || {
     title: "",
     desc: "",
-  };
+  }; // THE CURRENT OPENED STIC DETAILS WILL BE HERE
+
   const [edit, setEdit] = useState<boolean>(true);
   const { title, desc } = activeStick;
   const titleRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState<string>("");
   const [inputTitle, setInpuTitle] = useState<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+  // ENABLE EDIT OPTION
   const enbaleEdit = () => {
     setEdit(false);
     setTimeout(() => {
@@ -26,6 +31,24 @@ const Modal = ({ stickId }: { stickId: string }) => {
       }
     }, 0);
   };
+
+  const handleDelete = () => {
+    const filteredStick = sticks.filter((stick) => stick._id !== stickId);
+    const backeUp = sticks;
+    dispatch(setSticks(filteredStick));
+    deleteStick(stickId)
+      .then((res) => {
+        const modal = document.getElementById(
+          "my_modal_5"
+        ) as HTMLDialogElement;
+        if (modal) {
+          modal.close();
+        }
+      })
+      .catch(() => dispatch(setSticks(backeUp)));
+  };
+
+  // SETTING THE INTIAL VALUE
   useEffect(() => {
     setInpuTitle(activeStick.title);
     setValue(activeStick.desc);
@@ -67,7 +90,7 @@ const Modal = ({ stickId }: { stickId: string }) => {
               className="opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-300"
             />
           </button>
-          <button title="delete">
+          <button title="delete" onClick={handleDelete}>
             <Image
               src={"/images/trash.png"}
               alt="cancel"
