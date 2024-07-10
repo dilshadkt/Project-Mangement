@@ -26,7 +26,6 @@ const StickWallSection = () => {
     setTapes(sticks.stiks);
   }, [sticks]);
   useEffect(() => {
-    setToken(localStorage.getItem("token") as string);
     dispatch(getSticks(""));
   }, []);
   return (

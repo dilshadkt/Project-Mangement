@@ -2,9 +2,14 @@
 import Header from "@/components/header/Header";
 import StickWallSection from "@/container/dashboard-page/stickWall-section";
 import AddStick from "@/container/dashboard-page/stickWall-section/add-stick";
-import React from "react";
+import setToken from "@/utils/token";
+import React, { useEffect } from "react";
 
 const StickWall = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("token") as string;
+    setToken(token);
+  }, []);
   return (
     <section className="text-sm flex w-full  h-full">
       <div className="flex-1 flex flex-col">

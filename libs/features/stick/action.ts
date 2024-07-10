@@ -7,8 +7,6 @@ export const createStick = createAsyncThunk(
   "stick/createStick",
   async (stickData: any, thunkAPI) => {
     try {
-      const token = localStorage.getItem("token");
-      setToken(token as string);
       const response = await axios.post(`${API_URL}stick/create`, stickData);
       return response.data.sticks;
     } catch (error: any) {
