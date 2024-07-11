@@ -1,6 +1,6 @@
 import { API_URL } from "@/constants";
 import { RootState } from "@/libs/store";
-import axios from "axios";
+import axios from "@/utils/axios";
 import { useSelector } from "react-redux";
 
 export const deleteStick = async (stickId: string) => {

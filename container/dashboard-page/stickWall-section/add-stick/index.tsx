@@ -1,17 +1,13 @@
 "use client";
-import Drawyer from "@/components/drawyer";
-import React, { useState, useEffect, FormEvent } from "react";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-import "./index.css";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
-import axios from "axios";
-import { API_URL } from "@/constants";
-import setToken from "@/utils/token";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppStore, RootState } from "@/libs/store";
+import Drawyer from "@/components/drawyer";
 import { createStick } from "@/libs/features/stick/action";
-import { setError } from "@/libs/features/stick/stickSlice";
+import { AppDispatch, RootState } from "@/libs/store";
+import dynamic from "next/dynamic";
+import { FormEvent, useState } from "react";
+import "react-quill/dist/quill.snow.css";
+import { useDispatch, useSelector } from "react-redux";
+import "./index.css";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
