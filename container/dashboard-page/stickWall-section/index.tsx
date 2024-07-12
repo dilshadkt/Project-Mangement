@@ -36,10 +36,10 @@ const StickWallSection = () => {
           : tapes.map((item) => (
               <StickPaper
                 setSelectedStick={setSelectedStick}
-                title={item.title}
+                title={item?.title}
                 desc={item?.desc}
-                key={item._id}
-                id={item._id}
+                key={item?._id}
+                id={item?._id}
               />
             ))}
 

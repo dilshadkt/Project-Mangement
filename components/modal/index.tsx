@@ -16,7 +16,7 @@ interface StickData {
 
 const Modal = ({ stickId }: { stickId: string }) => {
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
-  const activeStick = sticks.filter((stick) => stick._id === stickId)[0] || {
+  const activeStick = sticks.filter((stick) => stick?._id === stickId)[0] || {
     title: "",
     desc: "",
   }; // THE CURRENT OPENED STIC DETAILS WILL BE HERE
@@ -62,13 +62,9 @@ const Modal = ({ stickId }: { stickId: string }) => {
       dataTochange.desc = value;
     }
     if (Object.keys(dataTochange).length > 0) {
-      saveChanges(stickId, dataTochange).then((res) =>
-        // {  console.log(res)
-        // console.log(stickId)}
-        {
-          dispatch(editSticks({ id: stickId, stick: res }));
-        }
-      );
+      saveChanges(stickId, dataTochange).then((res) => {
+        dispatch(editSticks({ id: stickId, stick: res }));
+      });
     }
   };
 
