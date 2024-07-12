@@ -1,20 +1,21 @@
+import { API_URL } from "@/constants";
 import axios from "axios";
 
+// Create an Axios instance
 const instance = axios.create({
-  baseURL: "https://airbnb-api-7y1p.onrender.com",
-  // baseURL: "http://localhost:8080",
+  // baseURL: "https://airbnb-api-7y1p.onrender.com", // Use your production API base URL
+  baseURL: `${API_URL}`, // Use your local development API base URL
+  withCredentials: true,
 });
 
+// Interceptor to handle any additional configurations
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
     return config;
   },
   (error) => {
     return Promise.reject(error);
   }
 );
+
 export default instance;

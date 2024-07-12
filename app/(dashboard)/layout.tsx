@@ -1,3 +1,4 @@
+"use client";
 import Sidbar from "@/components/sidebar/Sidbar";
 import React from "react";
 

@@ -10,36 +10,42 @@ export const sideBar = [
     title: "Upcoming",
     icon: KeyboardDoubleArrowLeftIcon,
     path: "/upcoming",
+    value: "upcoming",
   },
   {
     id: 2,
     title: "Today",
     icon: FormatListBulletedIcon,
     path: "/",
+    value: "today",
   },
   {
     id: 3,
     title: "Calender",
     icon: CalendarMonthIcon,
     path: "/calender",
+    value: "calender",
   },
   {
     id: 4,
     title: "Stick Wall",
     icon: NoteIcon,
     path: "/stick-wall",
+    value: "stickWall",
   },
   {
     id: 5,
     title: "Settings",
     icon: TuneIcon,
     path: "/settings",
+    value: "settings",
   },
   {
     id: 6,
     title: "Sign Out",
     icon: LogoutIcon,
     path: "/signout",
+    value: "signout",
   },
 ];
 

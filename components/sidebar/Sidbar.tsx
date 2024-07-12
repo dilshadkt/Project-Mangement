@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { sideBar } from "./constant";
 import Link from "next/link";
@@ -7,13 +7,16 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/libs/store";
+import { AppDispatch, RootState } from "@/libs/store";
 import { logout } from "@/libs/features/user/userSlice";
+import { getSticks } from "@/libs/features/stick/action";
 const Sidbar = () => {
   const pathName = usePathname();
   const [sideBarOpen, setSideBarOpen] = useState(true);
   const user = useSelector((store: RootState) => store.user);
-  const dispatch = useDispatch();
+  const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
+  const dispatch = useDispatch<AppDispatch>();
+
   const navigate = useRouter();
   const logoutUser = (item: any) => {
     if (item.title === "Sign Out") {
@@ -23,6 +26,10 @@ const Sidbar = () => {
       navigate.push(item.path);
     }
   };
+
+  useEffect(() => {
+    dispatch(getSticks(""));
+  }, []);
   return (
     <>
       <section
@@ -67,9 +74,11 @@ const Sidbar = () => {
                         <item.icon className="opacity-70 w-5" />
                         <span className="ml-3 ">{item.title}</span>
                       </div>
-                      <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
-                        12
-                      </span>
+                      {item.value === "stickWall" ? (
+                        <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
+                          {sticks.length}
+                        </span>
+                      ) : null}
                     </li>
                   </Link>
                 ))}
