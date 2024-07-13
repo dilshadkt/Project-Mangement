@@ -3,8 +3,8 @@ import axios from "axios";
 
 // Create an Axios instance
 const instance = axios.create({
-  baseURL: "https://airbnb-api-7y1p.onrender.com", // Use your production API base URL
-  // baseURL: `${API_URL}`, // Use your local development API base URL
+  // baseURL: "https://airbnb-api-7y1p.onrender.com", // Use your production API base URL
+  baseURL: `${API_URL}`, // Use your local development API base URL
   withCredentials: true,
 });
 
