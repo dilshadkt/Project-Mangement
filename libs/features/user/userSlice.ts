@@ -77,7 +77,7 @@ export const userSlice = createSlice({
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
       // setToken(action.payload.token);
-      // Cookies.set("token", action.payload.token);
+      Cookies.set("token", action.payload.token);
     });
     builders.addCase(signInUser.rejected, (state, action) => {
       state.loading = false;
