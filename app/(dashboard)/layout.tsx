@@ -1,4 +1,5 @@
 "use client";
+import isAuth from "@/components/protect/IsAuth";
 import Sidbar from "@/components/sidebar/Sidbar";
 import React from "react";
 
@@ -15,4 +16,4 @@ const DashboardLayout = ({
   );
 };
 
-export default DashboardLayout;
+export default isAuth(DashboardLayout);

@@ -13,10 +13,10 @@ const AuthForm = ({ authType }: { authType?: string }) => {
   const user = useSelector((store: RootState) => store.user);
 
   useEffect(() => {
-    if (user.logged) {
+    if (user.logged === true) {
       router.replace("/");
     }
-  }, [user.logged, router]);
+  }, [user.logged]);
 
   // REGISTER USER
   const clientAction = async (event: FormEvent<HTMLFormElement>) => {
