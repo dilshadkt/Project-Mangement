@@ -6,7 +6,6 @@ export async function middleware(request: NextRequest) {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   const protectedRoutes = ["/", "/stick-wall", "/upcoming", "/calendar"];
-
   // Check if the current path is protected
   const isProtectedRoute = protectedRoutes.includes(request.nextUrl.pathname);
 
@@ -18,6 +17,7 @@ export async function middleware(request: NextRequest) {
   // If token is present, verify it
   if (token) {
     const response = await verifyToken(token);
+    console.log("object", response);
 
     // If token is invalid and the route is protected, redirect to login
     if (!response.status && isProtectedRoute) {
