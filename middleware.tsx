@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
   // If token is present, verify it
   if (token) {
     const response = await verifyToken(token);
-    console.log("object", response);
 
     // If token is invalid and the route is protected, redirect to login
     if (!response.status && isProtectedRoute) {
