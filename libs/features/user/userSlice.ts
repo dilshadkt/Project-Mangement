@@ -22,9 +22,6 @@ export const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.logged = false;
-      Cookies.remove("token");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
     },
   },
   extraReducers: (builders) => {
@@ -41,19 +38,6 @@ export const userSlice = createSlice({
       state.error = null;
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
-      // localStorage.setItem("user", JSON.stringify(action.payload.user));
-
-      // Set token in cookie
-      Cookies.set(
-        "token",
-        action.payload.token
-        //    {
-        //   secure: true,
-        //   sameSite: "strict",
-        //   maxAge: 3600,
-        //   path: "/",
-        // }
-      );
     });
     builders.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
@@ -76,8 +60,6 @@ export const userSlice = createSlice({
       state.error = null;
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
-      // setToken(action.payload.token);
-      Cookies.set("token", action.payload.token);
     });
     builders.addCase(signInUser.rejected, (state, action) => {
       state.loading = false;

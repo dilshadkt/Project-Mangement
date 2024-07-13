@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/libs/store";
 import { logout } from "@/libs/features/user/userSlice";
 import { getSticks } from "@/libs/features/stick/action";
+import axios from "@/utils/axios";
 const Sidbar = () => {
   const pathName = usePathname();
   const [sideBarOpen, setSideBarOpen] = useState(true);
@@ -18,10 +19,19 @@ const Sidbar = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useRouter();
+  const handleLogout = async () => {
+    try {
+      await axios.post("auth/logout");
+      dispatch(logout());
+      localStorage.removeItem("token");
+      window.location.href = "/auth/login";
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   const logoutUser = (item: any) => {
     if (item.title === "Sign Out") {
-      dispatch(logout());
-      navigate.replace("/auth/login");
+      handleLogout();
     } else {
       navigate.push(item.path);
     }

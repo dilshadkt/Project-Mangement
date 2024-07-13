@@ -1,6 +1,4 @@
-import axios from "axios";
-import Axios from "@/utils/axios";
-import { API_URL } from "@/constants";
+import axios from "@/utils/axios";
 import setToken from "@/utils/token";
 
 export const login = async (userDetails: any) => {
@@ -19,7 +17,7 @@ export const signup = async (userDetails: any) => {
 
 export const auth = async () => {
   try {
-    const res = await Axios.post(`auth/home`);
+    const res = await axios.post(`auth/home`);
     return res.data;
   } catch (error: any) {
     return error.response.data;

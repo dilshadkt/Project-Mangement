@@ -1,15 +1,8 @@
 "use client";
-import { API_URL } from "@/constants";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "@/utils/axios";
 
 export interface LoginUserData {
-  email: string;
-  password: string;
-}
-interface SignInUserData {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
 }
@@ -18,7 +11,7 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (userData: any, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, userData);
+      const response = await axios.post(`/auth/login`, userData);
       return response.data;
     } catch (error: any) {
       const customError =
@@ -32,7 +25,7 @@ export const signInUser = createAsyncThunk(
   "user/signInUser",
   async (userData: any, thunkAPI) => {
     try {
-      const response = await axios.post(`${API_URL}auth/register`, userData);
+      const response = await axios.post(`auth/register`, userData);
       return response.data;
     } catch (error: any) {
       const customError =
