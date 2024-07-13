@@ -1,6 +1,6 @@
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import NoteIcon from "@mui/icons-material/Note";
 import TuneIcon from "@mui/icons-material/Tune";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -21,8 +21,8 @@ export const sideBar = [
   },
   {
     id: 3,
-    title: "Calender",
-    icon: CalendarMonthIcon,
+    title: "Timer",
+    icon: AccessTimeIcon,
     path: "/calender",
     value: "calender",
   },

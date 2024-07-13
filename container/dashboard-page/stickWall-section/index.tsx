@@ -27,12 +27,12 @@ const StickWallSection = () => {
     <section className="relative mt-8 w-full h-full  border shadow-md rounded-xl border-gray-200  overflow-hidden ">
       <div
         ref={parent}
-        className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-3 2xl:grid-cols-4 gap-5  p-5"
+        className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  2xl:grid-cols-4 gap-5  p-5"
       >
         {loading
           ? new Array(7)
               .fill("  ")
-              .map((index) => <StickPaper key={nanoid()} title="" />)
+              .map(() => <StickPaper key={nanoid()} title="" />)
           : tapes.map((item) => (
               <StickPaper
                 setSelectedStick={setSelectedStick}

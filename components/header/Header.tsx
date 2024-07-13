@@ -1,5 +1,6 @@
 "use client";
 import { RootState } from "@/libs/store";
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -17,9 +18,13 @@ const Header = ({ heading, value }: { heading: string; value?: number }) => {
           </span>
         )}
       </div>
-      <h5>
-        Welcome , <span>{name}</span>
-      </h5>
+      <div className=" flex items-center  text-gray-500">
+        <Link href={"/settings"}>
+          <div className="w-10  h-10 rounded-full border shadow-xl bg-gray-800  text-white font-medium text-lg flexCenter">
+            D
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };
