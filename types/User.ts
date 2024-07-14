@@ -17,7 +17,7 @@ export type UserData = {
 export type UserState = {
   userData: UserData;
   loading: boolean;
-  fetchError: string | undefined;
+  fetchError: string | null;
   error: string | null;
   logged: boolean;
 };

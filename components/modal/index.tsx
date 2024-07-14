@@ -94,13 +94,6 @@ const Modal = ({ stickId }: { stickId: string }) => {
           height={70}
           className="absolute  bottom-5 left-0  z-10 opacity-10"
         />
-        {/* <Image
-          src={"/images/fire.gif"}
-          alt="down"
-          width={70}
-          height={70}
-          className="absolute opacity-20 -left-5 z-50 bottom-0"
-        /> */}
         <div className="absolute bottom-5 right-5 z-50">
           {!edit ? (
             <button title="Save" className="mr-2" onClick={() => saveEdit()}>

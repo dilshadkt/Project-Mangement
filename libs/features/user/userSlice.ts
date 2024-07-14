@@ -11,7 +11,7 @@ import { DefaulUserData } from "./constant";
 const initialState: UserState = {
   userData: DefaulUserData,
   loading: false,
-  fetchError: undefined,
+  fetchError: null,
   error: null,
   logged: false,
 };
@@ -34,7 +34,7 @@ export const userSlice = createSlice({
       state.userData.email = action.payload.user.email;
       state.userData._id = action.payload.user.id;
       state.loading = false;
-      state.fetchError = undefined;
+      state.fetchError = null;
       state.error = null;
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
@@ -42,7 +42,7 @@ export const userSlice = createSlice({
     builders.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
       state.userData = initialState.userData;
-      state.fetchError = action.error.message;
+      state.fetchError = action.error.message as string;
       state.error = action.payload as string;
     });
 
@@ -56,7 +56,7 @@ export const userSlice = createSlice({
       state.userData.email = action.payload.user.email;
       state.userData._id = action.payload.user.id;
       state.loading = false;
-      state.fetchError = undefined;
+      state.fetchError = null;
       state.error = null;
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
@@ -64,7 +64,7 @@ export const userSlice = createSlice({
     builders.addCase(signInUser.rejected, (state, action) => {
       state.loading = false;
       state.userData = initialState.userData;
-      state.fetchError = action.error.message;
+      state.fetchError = action.error.message as string;
       state.error = action.payload as string;
     });
   },

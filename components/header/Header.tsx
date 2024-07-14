@@ -21,7 +21,7 @@ const Header = ({ heading, value }: { heading: string; value?: number }) => {
       <div className=" flex items-center  text-gray-500">
         <Link href={"/settings"}>
           <div className="w-10  h-10 rounded-full border shadow-xl bg-gray-800  text-white font-medium text-lg flexCenter">
-            D
+            {name?.charAt(0)}
           </div>
         </Link>
       </div>

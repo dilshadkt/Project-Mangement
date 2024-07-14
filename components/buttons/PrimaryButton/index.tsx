@@ -23,7 +23,7 @@ const PrimaryButton = ({
       }  flexCenter p-2 md:p-3 md:py-4 rounded-xl  text-sm font-medium text-textGray ${className} `}
     >
       {isLoading ? (
-        <Image src={"/svg/loading.svg"} alt="lading" width={20} height={20} />
+        <Image src={"/svg/loading.svg"} alt="loading" width={20} height={20} />
       ) : (
         text
       )}
