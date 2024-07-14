@@ -28,6 +28,13 @@ const Modal = ({ stickId }: { stickId: string }) => {
   const [inputTitle, setInpuTitle] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const modal = document.getElementById("my_modal_5") as HTMLDialogElement;
+
+  const closeModal = () => {
+    const modal = document.getElementById("my_modal_5") as HTMLDialogElement;
+    if (modal && typeof modal.close === "function") {
+      modal.close();
+    }
+  };
   // ENABLE EDIT OPTION
   const enbaleEdit = () => {
     setEdit(false);
@@ -44,9 +51,10 @@ const Modal = ({ stickId }: { stickId: string }) => {
     dispatch(setSticks(filteredStick));
     deleteStick(stickId)
       .then(() => {
-        if (modal) {
-          modal.close();
-        }
+        // if (modal) {
+        //   modal.close();
+        // }
+        closeModal();
       })
       .catch(() => dispatch(setSticks(backeUp)));
   };
@@ -62,9 +70,10 @@ const Modal = ({ stickId }: { stickId: string }) => {
     if (Object.keys(dataTochange).length > 0) {
       saveChanges(stickId, dataTochange).then((res) => {
         dispatch(editSticks({ id: stickId, stick: res }));
-        if (modal) {
-          modal.close();
-        }
+        // if (modal) {
+        //   modal.close();
+        // }
+        closeModal();
       });
     }
   };

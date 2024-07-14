@@ -1,4 +1,3 @@
-import { API_URL } from "@/constants";
 import axios from "axios";
 
 // Create an Axios instance
