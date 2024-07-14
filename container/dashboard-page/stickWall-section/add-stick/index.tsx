@@ -4,15 +4,18 @@ import Drawyer from "@/components/drawyer";
 import { createStick } from "@/libs/features/stick/action";
 import { AppDispatch, RootState } from "@/libs/store";
 import dynamic from "next/dynamic";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
+import { setSucces } from "@/libs/features/stick/stickSlice";
+import Image from "next/image";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const AddStick = () => {
   const [value, setValue] = useState<any>();
+  const titleRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const stick = useSelector((store: RootState) => store.stick);
   const success = useSelector((store: RootState) => store.stick.success);
@@ -22,6 +25,18 @@ const AddStick = () => {
       checkbox.checked = false;
     }
   };
+  useEffect(() => {
+    if (success) {
+      closeDrawer();
+      dispatch(setSucces());
+
+      //CLEAR THE FORM VALUE WHILE IT SUCCESS
+      setValue("");
+      if (titleRef.current) {
+        titleRef.current.value = "";
+      }
+    }
+  }, [success]);
   const addStickWall = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,7 +44,6 @@ const AddStick = () => {
       title: formData.get("title"),
       desc: value,
     };
-
     dispatch(createStick(stickDetails));
   };
 
@@ -37,8 +51,15 @@ const AddStick = () => {
     <Drawyer
       id="drawer"
       position="drawer-end"
-      className="w-[500px] flexCenter px-5"
+      className="w-[500px] flexCenter flex-col px-5"
     >
+      <Image
+        src={"/svg/logo.svg"}
+        alt="logo"
+        width={100}
+        height={100}
+        className="relative z-30 floating opacity-80  "
+      />
       <form
         onSubmit={addStickWall}
         className="w-full flex flex-col relative z-40 "
@@ -47,6 +68,7 @@ const AddStick = () => {
           Title
         </label>
         <input
+          ref={titleRef}
           type="text"
           name="title"
           required
@@ -64,7 +86,7 @@ const AddStick = () => {
         </div>
         <p className="text-xs text-red-500 my-2">{stick.error}</p>
         <div>
-          <PrimaryButton type="submit" text="Add" className="w-full" />
+          <PrimaryButton type="submit" text="ADD " className="w-full" />
         </div>
       </form>
     </Drawyer>

@@ -6,6 +6,6 @@ export const verifyToken = async () => {
 
     return res.data;
   } catch (error: any) {
-    return { status: false, error: error.response.data };
+    return { status: false };
   }
 };

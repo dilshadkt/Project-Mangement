@@ -7,7 +7,7 @@ const StickWall = () => {
     <section className="text-sm flex w-full  h-full">
       <div className="flex-1 flex flex-col">
         <Header heading="Stick Wall" />
-        <AddStick />
+        <AddStick /> {/* CREATE STICK DRAWYER  */}
         <StickWallSection />
       </div>
     </section>

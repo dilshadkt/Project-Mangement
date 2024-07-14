@@ -34,6 +34,9 @@ const stickSlice = createSlice({
         item._id == action.payload.id ? action.payload.stick : item
       );
     },
+    setSucces: (state) => {
+      state.success = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createStick.pending, (state) => {
@@ -42,7 +45,7 @@ const stickSlice = createSlice({
     builder.addCase(createStick.fulfilled, (state, action) => {
       (state.loading = false), (state.stick.stiks = action.payload);
       state.success = true;
-      state.error = "error";
+      state.error = null;
     });
     builder.addCase(createStick.rejected, (state, action) => {
       state.loading = false;
@@ -56,7 +59,6 @@ const stickSlice = createSlice({
     });
     builder.addCase(getSticks.fulfilled, (state, action) => {
       (state.loading = false), (state.stick.stiks = action.payload);
-      state.success = true;
     });
     builder.addCase(getSticks.rejected, (state, action) => {
       state.loading = false;
@@ -67,4 +69,5 @@ const stickSlice = createSlice({
 });
 
 export default stickSlice.reducer;
-export const { setError, setSticks, editSticks } = stickSlice.actions;
+export const { setError, setSticks, editSticks, setSucces } =
+  stickSlice.actions;
