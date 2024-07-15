@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Time Management Web Application Documentation
 
-First, run the development server:
+<a href="https://ibb.co/4RsqgC3"><img src="https://i.ibb.co/GQs63GN/Screenshot-2024-07-15-192029.png" alt="Screenshot-2024-07-15-192029" border="0"></a>
+
+## Table of Contents
+
+- Project Overview
+  
+- Features
+  
+- Technologies Used
+  
+- System Architecture
+  
+- Installation and Setup
+  
+- Usage
+  
+- API Endpoints
+  
+- Contributing
+  
+- License
+  
+- Contact Information
+
+
+## Project Overview
+
+This Time Management Web Application is designed to help users efficiently manage their time. The application includes a sticky wall paper for notes, a timer for tracking tasks, and a to-do list for task management.
+
+## Features
+
+- Sticky Wall Paper: Allows users to add, edit, and remove sticky notes.
+
+- Timer: A countdown timer to track time spent on tasks.
+
+- To-Do List: Users can add, update, and delete tasks.
+
+ 
+ ## Project Overview
+
+ ### Frontend
+
+- Framework: Next.js
+
+- Styling: CSS, Tailwind css
+
+- State Management: Redux
+
+### Backend
+
+- Framework: Express.js
+
+- Database: MongoDB
+
+- Authentication: JWT (JSON Web Token)
+
+## Installation and Setup
+
+### Prerequisites
+
+- Node.js (v14.x or higher)
+
+- MongoDB (local or Atlas)
+
+## Frontend Setup
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/dilshadkt/Project-Mangement.git
+
+cd timemanagementapp/frontend
 ```
+
+2. Install dependencies:
+
+```bash
+npm install
+
+```
+
+3. Run the development server:
+
+```bash
+
+npm run dev
+
+```
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+### Contributions are welcome! Please follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Fork the repository.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Create a new branch (git checkout -b feature/YourFeature).
 
-## Deploy on Vercel
+2. Commit your changes (git commit -m 'Add some feature').
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Push to the branch (git push origin feature/YourFeature).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Open a pull request.
