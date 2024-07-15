@@ -1,11 +1,13 @@
 "use client";
+import { useAppSelector } from "@/libs/hooks";
 import { RootState } from "@/libs/store";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
 const Header = ({ heading, value }: { heading: string; value?: number }) => {
-  const name = useSelector((store: RootState) => store.user.userData.name);
+  // const name = useSelector((store: RootState) => store.user.userData.name);
+  const name = useAppSelector((store) => store.user.userData.name);
   return (
     <div className="text-gray-800 flexBetween">
       <div className="flex">

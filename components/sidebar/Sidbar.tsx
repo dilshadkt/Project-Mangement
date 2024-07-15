@@ -17,8 +17,8 @@ const Sidbar = () => {
   const user = useSelector((store: RootState) => store.user);
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
   const dispatch = useDispatch<AppDispatch>();
-
   const navigate = useRouter();
+
   const handleLogout = async () => {
     try {
       await axios.post("auth/logout");
@@ -29,7 +29,7 @@ const Sidbar = () => {
       console.error("Logout failed:", error);
     }
   };
-  const logoutUser = (item: any) => {
+  const logoutUser = (item: (typeof sideBar)[0]) => {
     if (item.title === "Sign Out") {
       handleLogout();
     } else {
@@ -39,7 +39,7 @@ const Sidbar = () => {
 
   useEffect(() => {
     dispatch(getSticks(""));
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <section

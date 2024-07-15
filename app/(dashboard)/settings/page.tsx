@@ -3,7 +3,7 @@ import React from "react";
 
 const Settings = () => {
   return (
-    <main>
+    <main className=" h-full">
       <SettingsSection />
     </main>
   );
