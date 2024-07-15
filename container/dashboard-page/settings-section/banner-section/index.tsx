@@ -3,7 +3,7 @@ import React from "react";
 
 const BannerSection = () => {
   return (
-    <div className="flex  mt-5 rounded-lg p-5 bg-gradient-to-r from-white to-gray-100 relative  min-h-[200px] shadow-md border floating">
+    <div className="flex  z-30  mt-5 rounded-lg p-5 bg-gradient-to-r from-white to-gray-100 relative  min-h-[200px] shadow-md border floating">
       <Image
         src={"/images/paper.jpg"}
         alt="paper-texture"
