@@ -1,12 +1,8 @@
 "use client";
+import { UserState } from "@/types/User";
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, signInUser } from "./action";
-import { UserState } from "@/types/User";
-import Cookies from "js-cookie";
 import { DefaulUserData } from "./constant";
-
-// Check if a token exists in localStorage or Cookies
-// const token = localStorage.getItem("token") || Cookies.get("token");
 
 const initialState: UserState = {
   userData: DefaulUserData,
@@ -38,6 +34,8 @@ export const userSlice = createSlice({
       state.error = null;
       state.logged = true;
       localStorage.setItem("token", action.payload.token);
+      const { id, ...userDataWithouId } = action.payload.user;
+      localStorage.setItem("user", JSON.stringify(userDataWithouId));
     });
     builders.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;

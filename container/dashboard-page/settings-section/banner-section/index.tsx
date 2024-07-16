@@ -30,14 +30,14 @@ const BannerSection = () => {
         alt="success"
         width={170}
         height={170}
-        className="absolute top-5 right-5 opacity-30 border shadow-md -rotate-12"
+        className="absolute top-5 right-5 opacity-50 border shadow-md -rotate-12"
       />
       <Image
         src={"/svg/goal.svg"}
         alt="gaols"
         width={170}
         height={170}
-        className="absolute top-5 left-0 opacity-30 border shadow-md -rotate-12"
+        className="absolute top-5 left-0 opacity-50 bg-white border shadow-md -rotate-12"
       />
 
       <div className="absolute flexCenter -bottom-1/4 left-0 right-0 mx-auto w-[160px] shadow-md border-2 border-white rounded-full  aspect-square">
