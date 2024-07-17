@@ -1,5 +1,5 @@
 
-## Time Management Web Application Documentation
+## Time Management Web Application 
 
 <a href="https://ibb.co/4RsqgC3"><img src="https://i.ibb.co/GQs63GN/Screenshot-2024-07-15-192029.png" alt="Screenshot-2024-07-15-192029" border="0"></a>
 
