@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import { sideBar } from "./constant";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/libs/store";
-import { logout } from "@/libs/features/user/userSlice";
 import { getSticks } from "@/libs/features/stick/action";
+import { logout } from "@/libs/features/user/userSlice";
+import { AppDispatch, RootState } from "@/libs/store";
 import axios from "@/utils/axios";
+import AddIcon from "@mui/icons-material/Add";
+import MenuIcon from "@mui/icons-material/Menu";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { lists, sideBar } from "./constant";
 const Sidbar = () => {
   const pathName = usePathname();
   const [sideBarOpen, setSideBarOpen] = useState(true);
@@ -58,16 +58,16 @@ const Sidbar = () => {
           className="p-2 rounded-lg bg-transparent border my-3 w-full text-sm"
           placeholder="Search"
         />
-        <div className="text-sm mt-4 flex flex-col  h-full">
+        <div className="text-xs mt-2 flex flex-col  h-full">
           <h5 className="text-textGray font-medium">Tasks</h5>
-          <div className="flex flex-col  h-full justify-between">
-            <div>
-              <ul className="my-2 mb-3">
+          <div className="flex flex-col  h-full overflow-y-auto ">
+            <div className="h-full flex flex-col  ">
+              <ul className="my-2 mb-3  ">
                 {sideBar.slice(0, 4).map((item) => (
                   <Link href={item.path} key={item.id}>
                     <li
                       key={item.id}
-                      className={`relative overflow-hidden my-1  group flexBetween hover:shadow-md cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] ${
+                      className={`relative overflow-hidden my-[2px]  group flexBetween hover:shadow-md cursor-pointer text-textGray py-2 group hover:bg-[#EBEBEB] ${
                         pathName === item.path && `bg-[#EBEBEB]`
                       } px-2 rounded-lg`}
                     >
@@ -94,6 +94,67 @@ const Sidbar = () => {
                 ))}
               </ul>
               <hr />
+              <div className="mt-3  ">
+                <h5 className="text-textGray font-medium">Lists</h5>
+                <ul className="mt-2">
+                  {lists.map((list) => (
+                    <li className="px-2  group relative overflow-hidden py-2 my-1 flexBetween  hover:shadow-md rounded-lg cursor-pointer ">
+                      <Image
+                        src={"/images/paper.jpg"}
+                        alt="wall texture"
+                        width={200}
+                        height={30}
+                        className={`absolute w-full h-full object-cover opacity-0 group-hover:opacity-60  scale-x-125`}
+                      />
+                      <div className="flexStart relative z-30">
+                        <div className="w-[14px] h-[14px] bg-yellow-300 rounded-[4px]"></div>
+                        <span className="capitalize ml-3"> {list.title}</span>
+                      </div>
+                      <div></div>
+                    </li>
+                  ))}
+                  <li className="px-2  flexStart  text-gray-500  py-2 my-1   rounded-lg cursor-pointer">
+                    <AddIcon /> <span className="ml-3">Add New List</span>
+                  </li>
+                </ul>
+                {/* <hr />
+                <div className="mt-3">
+                  <h5 className="text-textGray font-medium">Tags</h5>
+                  <ul className="flex gap-1 flex-wrap mt-2">
+                    {tags.map((tag) => (
+                      <li className="py-1 cursor-pointer px-2 flexCenter rounded-md bg-yellow-200 ">
+                        {tag.title}
+                      </li>
+                    ))}
+                    <li className="py-[6px] cursor-pointer px-2 rounded-md flexStart bg-yellow-200 ">
+                      <div className=" font-medium flexCenter">
+                        <AddIcon fontSize="inherit" />
+                      </div>
+                      <span className="ml-1">Add Tag</span>
+                    </li>
+                  </ul>
+                </div> */}
+                {/* <div className="rounded-lg border border-gray-200 p-3">
+                  <div className="border relative p-1 py-2 rounded-lg">
+                    <div className="absolute top-0 bottom-0 left-3 my-auto rounded-sm  w-3 h-3 bg-yellow-300"></div>
+                    <input
+                      type="text"
+                      placeholder="List Name"
+                      className="bg-transparent border-none outline-none pl-8"
+                    />
+                  </div>
+                  <ul className="flexBetween my-2">
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                    <li className="rounded-sm  w-3 h-3 bg-yellow-300"></li>
+                  </ul>
+                </div> */}
+              </div>
             </div>
             <ul className="mt-2">
               {sideBar.slice(4).map((item) => (

@@ -91,3 +91,32 @@ export const authFormDetails = {
     },
   ],
 };
+
+export const lists = [
+  {
+    id: 1,
+    title: "personal",
+    color: "",
+  },
+  {
+    id: 2,
+    title: "work",
+    color: "",
+  },
+  {
+    id: 3,
+    title: "list 1",
+    color: "",
+  },
+];
+
+export const tags = [
+  {
+    id: 1,
+    title: "Tag 1",
+  },
+  {
+    id: 2,
+    title: "Tag 2",
+  },
+];
