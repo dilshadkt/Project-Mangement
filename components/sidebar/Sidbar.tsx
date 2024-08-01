@@ -11,9 +11,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lists, sideBar } from "./constant";
+
+type serachItemsProps = {
+  title: string;
+  path: string;
+};
 const Sidbar = () => {
   const pathName = usePathname();
   const [sideBarOpen, setSideBarOpen] = useState(true);
+  const [searchItems, setSearchItems] = useState<serachItemsProps[]>([]);
+  const [search, setSearch] = useState<string>("");
   const user = useSelector((store: RootState) => store.user);
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
   const dispatch = useDispatch<AppDispatch>();
@@ -40,24 +47,78 @@ const Sidbar = () => {
   useEffect(() => {
     dispatch(getSticks(""));
   }, [dispatch]);
+
+  const handleSearch = (e: any) => {
+    setSearch(e.target.value);
+    const filtered = sideBar.filter((item) =>
+      item.title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    const filteredSticks = sticks.filter((stick) =>
+      stick.title.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    const filteredStickWithPath = filteredSticks.map((item) => ({
+      title: item.title,
+      path: "/stick-wall",
+    }));
+
+    setSearchItems(() =>
+      [...filteredStickWithPath, ...filtered].map((item) => ({
+        title: item.title,
+        path: item.path,
+      }))
+    );
+  };
+
   return (
     <>
       <section
-        className={`bg-sidebarGray rounded-xl  w-[330px]  flex-col  p-4 h-full  ${
-          sideBarOpen ? `flex ` : `hidden `
+        className={`bg-sidebarGray rounded-xl flex  w-[330px]  flex-col  p-4 h-full  ${
+          sideBarOpen ? `translate-x-0 ` : `-translate-x-[120%] absolute  `
         } transition-all duration-300 ease-in`}
       >
         <nav className="flexBetween w-full text-textGray font-semibold">
           <h4>Menu</h4>
           <span onClick={() => setSideBarOpen(false)}>
-            <MenuIcon className="cursor-pointer" />
+            <MenuIcon className="cursor-pointer hover:text-yellow-600" />
           </span>
         </nav>
-        <input
-          type="text"
-          className="p-2 rounded-lg bg-transparent border my-3 w-full text-sm"
-          placeholder="Search"
-        />
+        <div className="relative">
+          <input
+            type="text"
+            className="p-2 rounded-lg bg-transparent border my-3 w-full text-sm"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => handleSearch(e)}
+          />
+
+          {search.length !== 0 && (
+            <div className="absolute  shadow-md  border w-full min-h-56 overflow-hidden text-gray-600 h-full text-xs  bg-white z-40 top-14 rounded-lg">
+              <div className="w-full h-full  p-3 py-5 relative">
+                <Image
+                  src={"/images/paper.jpg"}
+                  alt="paper texture"
+                  fill
+                  className="z-30 opacity-50 absolute bottom-0"
+                />
+                {searchItems.length === 0 ? (
+                  <span>{`no result found "${search}"`}</span>
+                ) : (
+                  <ul className="flex flex-col relative z-50 overflow-y-auto  gap-4 h-full">
+                    {searchItems.map((item) => (
+                      <Link href={item.path} onClick={() => setSearch("")}>
+                        <li className="flexStart group">
+                          <div className="w-2 h-2 group-hover:bg-gray-800 rounded-full bg-yellow-500"></div>
+                          <span className="ml-3">{item.title}</span>
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="text-xs mt-2 flex flex-col  h-full">
           <h5 className="text-textGray font-medium">Tasks</h5>
           <div className="flex flex-col  h-full overflow-y-auto ">
@@ -177,7 +238,7 @@ const Sidbar = () => {
         className={`${sideBarOpen ? `hidden` : `block`} p-3`}
         onClick={() => setSideBarOpen(true)}
       >
-        <MenuIcon className="cursor-pointer" />
+        <MenuIcon className="cursor-pointer hover:text-yellow-600" />
       </span>
     </>
   );
