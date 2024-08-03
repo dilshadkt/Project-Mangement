@@ -5,6 +5,7 @@ import { taksProps } from "..";
 import { Dispatch } from "@reduxjs/toolkit";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import axios from "@/utils/axios";
+import ConfirmOperaiton from "@/components/modal/confirmation";
 
 const TodayFormSection = ({
   setTaskOpen,
@@ -20,6 +21,7 @@ const TodayFormSection = ({
   setCurrentTask: React.Dispatch<taksProps | null>;
 }) => {
   const [chekedItems, setCheckedItems] = useState<string[]>([]);
+  const [alert, setAlert] = useState<boolean>(false);
   // ! STORE SELECTED TASK ID UNIQULY
   const handleCheckBox = (listId: string) => {
     setCheckedItems((prev) =>
@@ -29,7 +31,7 @@ const TodayFormSection = ({
     );
   };
   // ! DELETE THE MULTIPLE SELECTED TASK
-  const handleSelecteList = async () => {
+  const DeleteSelectedList = async () => {
     try {
       setTasks((prev: taksProps[]): taksProps[] =>
         prev.filter((task) => !chekedItems.includes(task._id))
@@ -45,6 +47,8 @@ const TodayFormSection = ({
       await Promise.all(deletePromises);
     } catch (error) {
       console.log(error);
+    } finally {
+      setAlert(false);
     }
   };
   return (
@@ -85,19 +89,26 @@ const TodayFormSection = ({
               />
               <h4 className="ml-4">{task.title}</h4>
             </div>
-            <ArrowForwardIosIcon className="" />
+            <span className="text-lg">
+              <ArrowForwardIosIcon fontSize="inherit" />
+            </span>
           </li>
         ))}
       </ul>
       {chekedItems.length !== 0 && (
         <div className="h-[70px] bg-white w-full absolute bottom-0 flex items-center justify-end">
           <PrimaryButton
-            onClick={() => handleSelecteList()}
+            onClick={() => setAlert(true)}
             text="Remove Selected Items"
-            className="text-xs px-4 bg-black/85 text-white font-normal  hover:bg-black/60"
+            className="text-xs px-4 bg-black text-white font-normal  hover:bg-black/60"
           />
         </div>
       )}
+      <ConfirmOperaiton
+        visible={alert}
+        setVisible={setAlert}
+        onclick={DeleteSelectedList}
+      />
     </div>
   );
 };

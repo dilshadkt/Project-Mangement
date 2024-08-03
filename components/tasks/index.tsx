@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PrimaryButton from "../buttons/PrimaryButton";
 import axios from "@/utils/axios";
 import { taksProps } from "@/container/dashboard-page/today-section";
+import ConfirmOperaiton from "../modal/confirmation";
 const Tasks = ({
   taskOpen,
   setTaskOpen,
@@ -19,6 +20,7 @@ const Tasks = ({
 }) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const [alert, setAlert] = useState<boolean>(false);
 
   useEffect(() => {
     if (titleRef.current) titleRef.current.value = currentTask?.title as string;
@@ -48,13 +50,17 @@ const Tasks = ({
   ) => {
     e.preventDefault();
     e.stopPropagation();
+    setAlert(true);
+  };
+  const DeleteTask = () => {
     axios
-      .delete(`todo/${listId}`)
+      .delete(`todo/${currentTask?._id}`)
       .then(() => {
         setTasks((prev: taksProps[]): taksProps[] =>
-          prev.filter((task) => task._id !== listId)
+          prev.filter((task) => task._id !== currentTask?._id)
         );
         setTaskOpen(false);
+        setAlert(false);
       })
       .catch((err) => console.log(err));
   };
@@ -134,6 +140,11 @@ const Tasks = ({
           )}
         </div>
       </form>
+      <ConfirmOperaiton
+        visible={alert}
+        setVisible={setAlert}
+        onclick={DeleteTask}
+      />
     </div>
   );
 };

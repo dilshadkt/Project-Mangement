@@ -16,7 +16,7 @@ const CalenderSection = () => {
     setTime(600);
   };
   const handleResetClick = () => {
-    setIsRunning(true);
+    setIsRunning(false);
     setTime(600);
   };
   const handlePauseClick = () => {

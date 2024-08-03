@@ -51,9 +51,6 @@ const Modal = ({ stickId }: { stickId: string }) => {
     dispatch(setSticks(filteredStick));
     deleteStick(stickId)
       .then(() => {
-        // if (modal) {
-        //   modal.close();
-        // }
         closeModal();
       })
       .catch(() => dispatch(setSticks(backeUp)));
@@ -70,9 +67,6 @@ const Modal = ({ stickId }: { stickId: string }) => {
     if (Object.keys(dataTochange).length > 0) {
       saveChanges(stickId, dataTochange).then((res) => {
         dispatch(editSticks({ id: stickId, stick: res }));
-        // if (modal) {
-        //   modal.close();
-        // }
         closeModal();
       });
     }
