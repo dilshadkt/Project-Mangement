@@ -20,12 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexendDex.className}>
-        <TimerContextProvider>
-          <TaskContextProvider>
-            <StoreProvider>{children}</StoreProvider>
-            <SonerProvider />
-          </TaskContextProvider>
-        </TimerContextProvider>
+        {/* <TimerContextProvider>
+          <TaskContextProvider> */}
+        <StoreProvider>{children}</StoreProvider>
+        <SonerProvider />
+        {/* </TaskContextProvider>
+        </TimerContextProvider> */}
       </body>
     </html>
   );
