@@ -22,18 +22,27 @@ export const TimerContext = createContext<TimerContextType | any>("");
 export const TimerContextProvider = ({ children }: { children: ReactNode }) => {
   const [time, setTime] = useState(Number(localStorage.getItem("time") || 600));
   const [isRunning, setIsRunning] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const storedTime = localStorage.getItem("time");
-    const storedIsRunning = localStorage.getItem("isRunning");
-    if (storedTime) setTime(Number(storedTime));
-    if (storedIsRunning) setIsRunning(storedIsRunning === "true");
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("time", time.toString());
-    localStorage.setItem("isRunning", isRunning.toString());
-  }, [time, isRunning]);
+    if (isMounted) {
+      const storedTime = localStorage.getItem("time");
+      const storedIsRunning = localStorage.getItem("isRunning");
+      if (storedTime) setTime(Number(storedTime));
+      if (storedIsRunning) setIsRunning(storedIsRunning === "true");
+    }
+  }, [isMounted]);
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem("time", time.toString());
+      localStorage.setItem("isRunning", isRunning.toString());
+    }
+  }, [time, isRunning, isMounted]);
 
   useEffect(() => {
     let timer: any;

@@ -1,5 +1,4 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
-import Image from "next/image";
 import React from "react";
 import BannerSection from "./banner-section";
 import Link from "next/link";
