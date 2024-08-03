@@ -17,23 +17,14 @@ const Tasks = ({
   setTaskOpen: React.Dispatch<boolean>;
   setTasks: Dispatch<React.SetStateAction<taksProps[]>>;
 }) => {
-  const taskBarRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
-  // FOR CLOSING THE BAR WHILE CLICK OUTSIDE
-  // useEffect(() => {
-  //   const handleClose = (e: MouseEvent) => {
-  //     if (
-  //       taskBarRef.current &&
-  //       !taskBarRef.current.contains(e.target as Node)
-  //     ) {
-  //       setTaskOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClose);
-  //   return () => document.removeEventListener("mousedown", handleClose);
-  // }, [taskBarRef]);
+  useEffect(() => {
+    if (titleRef.current) titleRef.current.value = currentTask?.title as string;
+    if (descriptionRef.current)
+      descriptionRef.current.value = currentTask?.description as string;
+  }, [currentTask]);
 
   // !CREATE NEW TASK
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -85,7 +76,6 @@ const Tasks = ({
 
   return (
     <div
-      ref={taskBarRef}
       className={` ${
         taskOpen
           ? ` w-[50%] ml-5 p-5 px-6 `
@@ -116,7 +106,6 @@ const Tasks = ({
             className="p-3 border border-gray-200 my-1 text-textGray/80 rounded-lg bg-transparent outline-none w-full"
             onChange={() => null}
             placeholder="Enter a beautiful title"
-            defaultValue={addTask ? "" : currentTask?.title}
           />
           <textarea
             ref={descriptionRef}
@@ -124,7 +113,6 @@ const Tasks = ({
             required
             className="p-3 border min-h-28 border-gray-200 my-1 text-textGray/80  placeholder-textGray/80 rounded-lg bg-transparent outline-none w-full"
             placeholder="description"
-            defaultValue={addTask ? "" : currentTask?.description}
           ></textarea>
         </div>
         <div className="flex items-center justify-between gap-7">

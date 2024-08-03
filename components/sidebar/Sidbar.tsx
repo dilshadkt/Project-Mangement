@@ -11,6 +11,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lists, sideBar } from "./constant";
+import { TaskCnxt, TimerCnxt } from "@/libs/context";
+import { formatTime } from "@/utils/formateTime";
+import { nanoid } from "nanoid";
 
 type serachItemsProps = {
   title: string;
@@ -25,6 +28,8 @@ const Sidbar = () => {
   const sticks = useSelector((store: RootState) => store.stick.stick.stiks);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useRouter();
+  const { time } = TimerCnxt();
+  const { tasks } = TaskCnxt();
 
   const handleLogout = async () => {
     try {
@@ -105,7 +110,11 @@ const Sidbar = () => {
                 ) : (
                   <ul className="flex flex-col relative z-50 overflow-y-auto  gap-4 h-full">
                     {searchItems.map((item) => (
-                      <Link href={item.path} onClick={() => setSearch("")}>
+                      <Link
+                        key={nanoid()}
+                        href={item.path}
+                        onClick={() => setSearch("")}
+                      >
                         <li className="flexStart group">
                           <div className="w-2 h-2 group-hover:bg-gray-800 rounded-full bg-yellow-500"></div>
                           <span className="ml-3">{item.title}</span>
@@ -145,6 +154,16 @@ const Sidbar = () => {
                         <item.icon className="opacity-70 w-5" />
                         <span className="ml-3 ">{item.title}</span>
                       </div>
+                      {item.value === "today" && (
+                        <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
+                          {tasks.length}
+                        </span>
+                      )}
+                      {item.value === "calender" && (
+                        <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
+                          {time && formatTime(time)}
+                        </span>
+                      )}
                       {item.value === "stickWall" ? (
                         <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
                           {sticks.length}
@@ -159,7 +178,10 @@ const Sidbar = () => {
                 <h5 className="text-textGray font-medium">Lists</h5>
                 <ul className="mt-2">
                   {lists.map((list) => (
-                    <li className="px-2  group relative overflow-hidden py-2 my-1 flexBetween  hover:shadow-md rounded-lg cursor-pointer ">
+                    <li
+                      key={nanoid()}
+                      className="px-2  group relative overflow-hidden py-2 my-1 flexBetween  hover:shadow-md rounded-lg cursor-pointer "
+                    >
                       <Image
                         src={"/images/paper.jpg"}
                         alt="wall texture"

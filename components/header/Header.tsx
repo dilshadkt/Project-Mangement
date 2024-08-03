@@ -14,11 +14,14 @@ const Header = ({ heading, value }: { heading: string; value?: number }) => {
         <h3 className="medium-40  [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500 ">
           {heading}
         </h3>
-        {value && (
-          <span className="border rounded-lg regular-40 ml-9 px-3 ">
-            {value}
-          </span>
-        )}
+
+        <span
+          className={`${
+            value ? "block" : "hidden"
+          } border rounded-lg regular-40 ml-9 px-3 `}
+        >
+          {value}
+        </span>
       </div>
       <div className=" flex items-center  text-gray-500">
         <Link href={"/settings"}>

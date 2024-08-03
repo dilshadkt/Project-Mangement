@@ -2,7 +2,7 @@ import CalenderSection from "@/container/dashboard-page/calender-section";
 
 const Calender = () => {
   return (
-    <main>
+    <main className="flex flex-col h-full">
       <CalenderSection />
     </main>
   );

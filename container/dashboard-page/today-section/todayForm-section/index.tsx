@@ -31,21 +31,18 @@ const TodayFormSection = ({
   // ! DELETE THE MULTIPLE SELECTED TASK
   const handleSelecteList = async () => {
     try {
-      // Function to delete a single item
-      const deleteItem = async (listId: string) => {
-        await axios.delete(`todo/${listId}`);
-      };
-
-      // Create an array of promises for deleting all checked items
-      const deletePromises = chekedItems.map(deleteItem);
-
-      // Await all delete operations to complete
-      await Promise.all(deletePromises);
       setTasks((prev: taksProps[]): taksProps[] =>
         prev.filter((task) => !chekedItems.includes(task._id))
       );
       setCheckedItems([]);
-      setTaskOpen(false);
+      // Function to delete a single item
+      const deleteItem = async (listId: string) => {
+        await axios.delete(`todo/${listId}`);
+      };
+      // Create an array of promises for deleting all checked items
+      const deletePromises = chekedItems.map(deleteItem);
+      // Await all delete operations to complete
+      await Promise.all(deletePromises);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +52,11 @@ const TodayFormSection = ({
       <button
         onClick={() => {
           setAddTask(true), setTaskOpen(true);
+          setCurrentTask({
+            title: "",
+            description: "",
+            _id: "",
+          });
         }}
         className="w-full p-3 flexStart text-gray-500 font-normal text-sm border border-gray-200 rounded-lg "
       >
@@ -66,8 +68,9 @@ const TodayFormSection = ({
           <li
             key={task._id}
             onClick={() => {
+              setAddTask(false);
               setCurrentTask(task);
-              setTaskOpen(true), setAddTask(false);
+              setTaskOpen(true);
             }}
             className={`p-3 border-b text-textGray cursor-pointer   flexBetween`}
           >

@@ -3,6 +3,8 @@ import { lexendDex } from "@/libs/fonts";
 import "./globals.css";
 import StoreProvider from "@/libs/StoreProvider";
 import SonerProvider from "@/libs/SonnerProvider";
+import { TimerContextProvider } from "@/libs/context/TimerContext";
+import { TaskContextProvider } from "@/libs/context/taskContext";
 
 export const metadata: Metadata = {
   title: "Organic Mind",
@@ -18,8 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexendDex.className}>
-        <StoreProvider>{children}</StoreProvider>
-        <SonerProvider />
+        <TimerContextProvider>
+          <TaskContextProvider>
+            <StoreProvider>{children}</StoreProvider>
+            <SonerProvider />
+          </TaskContextProvider>
+        </TimerContextProvider>
       </body>
     </html>
   );

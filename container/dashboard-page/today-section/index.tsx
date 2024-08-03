@@ -4,6 +4,7 @@ import TodayFormSection from "./todayForm-section";
 import Tasks from "@/components/tasks";
 import Header from "@/components/header/Header";
 import axios from "@/utils/axios";
+import { TaskCnxt } from "@/libs/context";
 export type taksProps = {
   _id: string;
   title: string;
@@ -13,17 +14,13 @@ export type taksProps = {
 const TodaySection = () => {
   const [taskOpen, setTaskOpen] = useState(false);
   const [addTask, setAddTask] = useState(false);
-  const [tasks, setTasks] = useState<taksProps[]>([]);
   const [currentTask, setCurrentTask] = useState<taksProps | null>(null);
-
-  useEffect(() => {
-    axios.get("todo").then((res) => setTasks(res.data.todos));
-  }, []);
+  const { tasks, setTasks } = TaskCnxt();
 
   return (
     <section className="text-sm flex w-full  overflow-hidden h-full">
       <div className="flex-1 flex flex-col">
-        <Header heading="Today" value={5} />
+        <Header heading="Today" value={tasks.length} />
         <TodayFormSection
           setTaskOpen={setTaskOpen}
           setAddTask={setAddTask}
