@@ -156,7 +156,7 @@ const Sidbar = () => {
                       </div>
                       {item.value === "today" && (
                         <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
-                          {tasks.length}
+                          {tasks.length > 0 && tasks.length}
                         </span>
                       )}
                       {item.value === "calender" && (
@@ -166,7 +166,7 @@ const Sidbar = () => {
                       )}
                       {item.value === "stickWall" ? (
                         <span className="px-2  z-30 bg-[#EBEBEB] group-hover:bg-white rounded-[4px]">
-                          {sticks.length}
+                          {sticks.length > 0 && sticks.length}
                         </span>
                       ) : null}
                     </li>

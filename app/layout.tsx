@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
-import { lexendDex } from "@/libs/fonts";
-import "./globals.css";
-import StoreProvider from "@/libs/StoreProvider";
 import SonerProvider from "@/libs/SonnerProvider";
-import { TimerContextProvider } from "@/libs/context/TimerContext";
-import { TaskContextProvider } from "@/libs/context/taskContext";
+import StoreProvider from "@/libs/StoreProvider";
+import { lexendDex } from "@/libs/fonts";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Organic Mind",
