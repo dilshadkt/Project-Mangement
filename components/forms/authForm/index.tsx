@@ -3,6 +3,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { authFormDetails } from "@/components/sidebar/constant";
 import { loginUser, signInUser } from "@/libs/features/user/action";
 import { AppDispatch, RootState } from "@/libs/store";
+import axios from "@/utils/axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect } from "react";
@@ -27,6 +28,15 @@ const AuthForm = ({ authType }: { authType?: string }) => {
     authType === "register"
       ? dispatch(signInUser(userDetails))
       : dispatch(loginUser(userDetails));
+  };
+
+  // GOOGLE AUTH
+  const googleAuth = () => {
+    window.location.href = "http://localhost:8080/api/auth/google";
+  };
+  // FACEBOOK AUTH
+  const facebookAuth = () => {
+    window.location.href = "http://localhost:8080/api/auth/facebook";
   };
 
   return (
@@ -67,10 +77,12 @@ const AuthForm = ({ authType }: { authType?: string }) => {
         <PrimaryButton
           text="Google"
           className="w-full bg-gray-200 font-medium"
+          onClick={googleAuth}
         />
         <PrimaryButton
           text="facebook"
           className="w-full bg-gray-200 font-medium"
+          onClick={facebookAuth}
         />
       </div>
       <div className="medium-14 text-textGray w-full flex justify-center my-4">

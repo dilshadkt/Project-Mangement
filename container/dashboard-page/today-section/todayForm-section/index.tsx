@@ -6,6 +6,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import axios from "@/utils/axios";
 import ConfirmOperaiton from "@/components/modal/confirmation";
+import Image from "next/image";
+import AiTodo from "../../ai-tool-section/todo-tool";
 
 const TodayFormSection = ({
   setTaskOpen,
@@ -52,7 +54,7 @@ const TodayFormSection = ({
     }
   };
   return (
-    <div className="mt-8  w-full h-full  relative">
+    <div className="mt-8  w-full h-screen flex flex-col relative">
       <button
         onClick={() => {
           setAddTask(true), setTaskOpen(true);
@@ -67,7 +69,7 @@ const TodayFormSection = ({
         <AddIcon className="font-bold" />{" "}
         <span className="ml-3"> Add new task</span>
       </button>
-      <ul className="mt-2">
+      <ul className="mt-2 overflow-y-auto pb-24  h-full">
         {tasks.map((task) => (
           <li
             key={task._id}
@@ -109,6 +111,8 @@ const TodayFormSection = ({
         setVisible={setAlert}
         onclick={DeleteSelectedList}
       />
+      {/* AI TOOLKIT ICON  */}
+      <AiTodo />
     </div>
   );
 };
