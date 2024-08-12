@@ -47,7 +47,7 @@ This Time Management Web Application is designed to help users efficiently manag
 
 - Styling: CSS, Tailwind css
 
-- State Management: Redux
+- State Management: Redux , Context Api
 
 ### Backend
 
