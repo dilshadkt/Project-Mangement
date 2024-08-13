@@ -25,9 +25,11 @@ export const signInUser = createAsyncThunk(
   "user/signInUser",
   async (userData: any, thunkAPI) => {
     try {
+      console.log(userData);
       const response = await axios.post(`auth/register`, userData);
       return response.data;
     } catch (error: any) {
+      console.log(error);
       const customError =
         error.response?.data?.error || "An unexpected error occurred";
       return thunkAPI.rejectWithValue(customError);

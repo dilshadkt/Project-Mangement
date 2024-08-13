@@ -3,6 +3,7 @@ import { UserState } from "@/types/User";
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, signInUser } from "./action";
 import { DefaulUserData } from "./constant";
+import { set } from "lodash";
 
 const initialState: UserState = {
   userData: DefaulUserData,
@@ -18,6 +19,9 @@ export const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.logged = false;
+    },
+    setAuthError: (state, action) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builders) => {
@@ -69,4 +73,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { logout } = userSlice.actions;
+export const { logout, setAuthError } = userSlice.actions;

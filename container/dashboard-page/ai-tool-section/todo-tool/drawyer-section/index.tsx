@@ -25,7 +25,7 @@ const DrawerSection = ({
   const generateTodoList = async () => {
     setError(null);
     if (prompt.length === 0) {
-      return setError("Enter the prompt");
+      return setError("Hey yoo give some thing about your day");
     }
     setLoading(true);
     try {
@@ -59,9 +59,7 @@ const DrawerSection = ({
         const result = await axios.get("todo");
         setTasks(result.data.todos);
         // clearing the drawyer
-        setPrompt("");
-        setTodoList(null);
-        setIsPromptBoxOpen(false);
+        handleClose();
       } else {
         setError("tolist is empty");
       }
@@ -71,20 +69,24 @@ const DrawerSection = ({
       setLoading(false);
     }
   };
+  const handleClose = () => {
+    setPrompt("");
+    setTodoList(null);
+    setError("");
+    setIsPromptBoxOpen(false);
+  };
   return (
     <div
       className={` ${
         isPromptBoxOpen
-          ? ` w-[50%] ml-5 p-5 px-6 `
-          : `translate-x-[200%] min-w-0 h-0 w-0 overflow-hidden`
-      } flex-initial  flex flex-col min-w-[450px] max-w-[450px]    shadow-md border border-gray-200/20  bg-sidebarGray h-[90vh] rounded-xl transition-all duration-500`}
+          ? ` w-[50%] ml-5  `
+          : `scale-0 w-0 overflow-hidden hidden`
+      } flex-initial  flex flex-col min-w-[450px] max-w-[450px]  p-5 px-6  shadow-md border border-gray-200/20  bg-sidebarGray h-[90vh] rounded-xl transition-all duration-500`}
     >
       <div className="flexBetween">
         <h4 className="text-textGray font-semibold">Ask Ai to shedule :</h4>
         <span
-          onClick={() => {
-            setIsPromptBoxOpen(false);
-          }}
+          onClick={() => handleClose()}
           className="w-fit h-fit hover:bg-gray-200 rounded-full p-[4px]"
         >
           <CloseIcon className="cursor-pointer font-bold w-4" />

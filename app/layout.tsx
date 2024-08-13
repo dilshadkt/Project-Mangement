@@ -3,7 +3,8 @@ import StoreProvider from "@/libs/StoreProvider";
 import { lexendDex } from "@/libs/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { AuthContextProvider } from "@/libs/context/AuthContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 export const metadata: Metadata = {
   title: "Organic Mind",
   description:
@@ -18,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lexendDex.className}>
-        {/* <TimerContextProvider>
-          <TaskContextProvider> */}
-        <StoreProvider>{children}</StoreProvider>
+        <GoogleOAuthProvider clientId={`${process.env.CLIENT_ID}`}>
+          <AuthContextProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </AuthContextProvider>
+        </GoogleOAuthProvider>
         <SonerProvider />
-        {/* </TaskContextProvider>
-        </TimerContextProvider> */}
       </body>
     </html>
   );

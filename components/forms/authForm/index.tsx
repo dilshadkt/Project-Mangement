@@ -1,17 +1,26 @@
 "use client";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { authFormDetails } from "@/components/sidebar/constant";
+import { AuthCnxt } from "@/libs/context";
 import { loginUser, signInUser } from "@/libs/features/user/action";
+import { setAuthError } from "@/libs/features/user/userSlice";
 import { AppDispatch, RootState } from "@/libs/store";
-import axios from "@/utils/axios";
+import { verifyEmail } from "@/services/verifyEmail";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import Axios from "@/utils/axios";
+import ActionButton from "@/components/buttons/ActionButton";
 const AuthForm = ({ authType }: { authType?: string }) => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const user = useSelector((store: RootState) => store.user);
+  const [googleUser, setGoogleUser] = useState<any>(null);
+  const [isLoading, setIsloading] = useState(false);
+  const { updateOtStatus } = AuthCnxt();
 
   useEffect(() => {
     if (user.logged === true) {
@@ -19,25 +28,69 @@ const AuthForm = ({ authType }: { authType?: string }) => {
     }
   }, [user.logged]);
 
+  const setError = (error: string) => {
+    dispatch(setAuthError(error));
+  };
+
   // REGISTER USER
   const clientAction = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const email = formData.get("email") as string;
     const userDetails = Object.fromEntries(formData);
-
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
     authType === "register"
-      ? dispatch(signInUser(userDetails))
+      ? verifyEmail(router, email, updateOtStatus, setError)
       : dispatch(loginUser(userDetails));
   };
 
-  // GOOGLE AUTH
-  const googleAuth = () => {
-    window.location.href = "http://localhost:8080/api/auth/google";
-  };
   // FACEBOOK AUTH
   const facebookAuth = () => {
     window.location.href = "http://localhost:8080/api/auth/facebook";
   };
+  useEffect(() => {
+    const googleSignUp = async (data: any) => {
+      const userData = {
+        firstName: data.given_name,
+        lastName: data.family_name,
+        googleId: data.id,
+        email: data.email,
+      };
+      authType === "register"
+        ? dispatch(signInUser(userData))
+        : dispatch(loginUser(userData));
+    };
+    if (googleUser) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${googleUser.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          googleSignUp(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [googleUser]);
+  useEffect(() => {
+    setError("");
+  }, [authType]);
+
+  // GOOGLE AUTH
+  const googleAuthRegister = useGoogleLogin({
+    onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+    onError: (error) => console.log(error),
+  });
+  const googleAuthSignin = useGoogleLogin({
+    onSuccess: (codeResponse) => setGoogleUser(codeResponse),
+    onError: (error) => console.log(error),
+  });
 
   return (
     <>
@@ -74,11 +127,15 @@ const AuthForm = ({ authType }: { authType?: string }) => {
         <hr />
       </div>
       <div className="flexBetween gap-6 mt-6">
-        <PrimaryButton
+        <ActionButton
           text="Google"
-          className="w-full bg-gray-200 font-medium"
-          onClick={googleAuth}
+          ButtonStyle="w-full bg-gray-200 font-medium"
+          isLoading={isLoading}
+          onClick={() =>
+            authType === "register" ? googleAuthRegister() : googleAuthSignin()
+          }
         />
+
         <PrimaryButton
           text="facebook"
           className="w-full bg-gray-200 font-medium"

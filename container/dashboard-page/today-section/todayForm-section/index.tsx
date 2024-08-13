@@ -98,11 +98,11 @@ const TodayFormSection = ({
         ))}
       </ul>
       {chekedItems.length !== 0 && (
-        <div className="h-[70px] bg-white w-full absolute bottom-0 flex items-center justify-end">
+        <div className="h-[70px] bg-white w-full absolute bottom-0 flex items-center justify-start">
           <PrimaryButton
             onClick={() => setAlert(true)}
             text="Remove Selected Items"
-            className="text-xs px-4 bg-black text-white font-normal  hover:bg-black/60"
+            className="text-xs px-4 bg-black  font-normal  hover:bg-black/60"
           />
         </div>
       )}
