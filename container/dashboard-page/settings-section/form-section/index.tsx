@@ -96,9 +96,10 @@ const FormSection = () => {
               </label>
               <input
                 type="email"
+                {...register("email")}
                 disabled
                 className="outline-none mb-2 border-none p-3 w-full bg-transparent "
-                placeholder="hmydilshadkt@gmail.com"
+                placeholder="abc@gmail.com"
               />
             </form>
             <div className="absolute bottom-5 flexStart left-5 z-50">

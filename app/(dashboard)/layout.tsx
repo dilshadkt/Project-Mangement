@@ -1,4 +1,5 @@
 "use client";
+import MobileNavabar from "@/components/mobileNav";
 import isAuth from "@/components/protect/IsAuth";
 import Sidbar from "@/components/sidebar/Sidbar";
 import { TaskContextProvider } from "@/libs/context/taskContext";
@@ -16,6 +17,7 @@ const DashboardLayout = ({
         <TaskContextProvider>
           <Sidbar />
           <div className="w-full  md:pl-5 py-2  ">{children}</div>
+          <MobileNavabar />
         </TaskContextProvider>
       </TimerContextProvider>
     </div>
