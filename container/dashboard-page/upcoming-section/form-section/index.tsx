@@ -1,53 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import TodayFormSection from "../../today-section/todayForm-section";
-import { TaskCnxt } from "@/libs/context";
-import { taksProps } from "../../today-section";
-
+import Calender from "@/components/calender";
+import CurrentUserStatus from "../current-status";
+import FoucusTimer from "../focus-timer";
+import UpcomingTask from "../task";
 const UpcomingFormSection = () => {
-  const [taskOpen, setTaskOpen] = useState(false);
-  const [addTask, setAddTask] = useState(false);
-  const [currentTask, setCurrentTask] = useState<taksProps | null>(null);
-  const { tasks, setTasks } = TaskCnxt();
   return (
-    <section className="w-full gap-6 grid h-full  mt-5 grid-cols-1 overflow-y-scroll">
-      <div className="h-full border w-full rounded-lg p-5">
-        <h4 className=" text-lg [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
-          Today
-        </h4>
-        <TodayFormSection
-          setTaskOpen={setTaskOpen}
-          setAddTask={setAddTask}
-          tasks={tasks}
-          setCurrentTask={setCurrentTask}
-          setTasks={setTasks}
-        />
+    <section className="w-full gap-6 grid h-full  mt-5 grid-cols-1 overflow-y-auto hide-scrollbar ">
+      <div className="h-[370px]  w-full grid grid-cols-7 gap-x-5">
+        {/* Current user status - count of [ tasks , username  ]   */}
+        <CurrentUserStatus />
+        {/* Calender section   */}
+        <div className=" shadow-xl rounded-xl col-span-3">
+          <Calender />
+        </div>
       </div>
-      <div className="h-full  w-full  grid grid-cols-2 gap-5">
-        <div className="w-full h-full border rounded-lg p-5">
-          <h4 className=" text-lg [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
-            Tommorrow
-          </h4>
-          <TodayFormSection
-            setTaskOpen={setTaskOpen}
-            setAddTask={setAddTask}
-            tasks={tasks}
-            setCurrentTask={setCurrentTask}
-            setTasks={setTasks}
-          />
-        </div>
-        <div className="w-full h-full border rounded-lg p-5">
-          <h4 className=" text-lg [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
-            This Week
-          </h4>
-          <TodayFormSection
-            setTaskOpen={setTaskOpen}
-            setAddTask={setAddTask}
-            tasks={tasks}
-            setCurrentTask={setCurrentTask}
-            setTasks={setTasks}
-          />
-        </div>
+      <div className="h-[470px]  w-full grid grid-cols-7 gap-x-5">
+        {/* Upcoming tasks are here  */}
+        <UpcomingTask />
+        {/* Foucus timer  */}
+        <FoucusTimer />
       </div>
     </section>
   );

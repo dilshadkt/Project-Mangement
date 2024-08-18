@@ -5,7 +5,7 @@ import UpcomingFormSection from "@/container/dashboard-page/upcoming-section/for
 const UpcomingSection = () => {
   return (
     <div className="flex-1 flex flex-col">
-      <Header heading="Upcoming Tasks" />
+      <Header heading="Dashboard" />
       <UpcomingFormSection />
     </div>
   );

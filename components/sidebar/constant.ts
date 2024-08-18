@@ -7,7 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 export const sideBar = [
   {
     id: 1,
-    title: "Upcoming",
+    title: "Dashboard",
     icon: KeyboardDoubleArrowLeftIcon,
     path: "/upcoming",
     value: "upcoming",
