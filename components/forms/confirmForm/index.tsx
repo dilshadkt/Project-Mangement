@@ -71,7 +71,7 @@ const ConfirmationForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h4 className="my-4 bold-38">Verify Email</h4>
-      <p>
+      <p className="text-sm text-gray-600 md:text-base">
         Enter the 6-digit code we sent to your email address to verify your
         account
       </p>
