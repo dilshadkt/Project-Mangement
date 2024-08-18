@@ -92,7 +92,7 @@ const ConfirmationForm = () => {
         ))}
       </div>
       {error && <p className="text-xs text-red-500 ">{error}</p>}
-      <ActionButton text="Vefiy" ButtonStyle="w-full mt-7" />
+      <ActionButton text="Vefiy" ButtonStyle="w-full mt-7 py-3" />
     </form>
   );
 };

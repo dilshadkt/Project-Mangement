@@ -117,7 +117,7 @@ const AuthForm = ({ authType }: { authType?: string }) => {
         <PrimaryButton
           type="submit"
           text={authType === "register" ? "Log in" : "Sign in"}
-          className="w-full my-4"
+          className="w-full my-4 py-3"
         />
       </form>
       <div className="mt-4 relative">
@@ -129,7 +129,7 @@ const AuthForm = ({ authType }: { authType?: string }) => {
       <div className="flexBetween gap-6 mt-6">
         <ActionButton
           text="Google"
-          ButtonStyle="w-full bg-gray-200 font-medium"
+          ButtonStyle="w-full py-3 bg-gray-200 font-medium"
           isLoading={isLoading}
           onClick={() =>
             authType === "register" ? googleAuthRegister() : googleAuthSignin()
@@ -138,7 +138,7 @@ const AuthForm = ({ authType }: { authType?: string }) => {
 
         <PrimaryButton
           text="facebook"
-          className="w-full bg-gray-200 font-medium"
+          className="w-full bg-gray-200 py-3 font-medium"
           onClick={facebookAuth}
         />
       </div>

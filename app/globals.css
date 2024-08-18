@@ -106,6 +106,9 @@ body {
   .medium-40 {
     @apply text-[40px] font-[600] leading-[120%];
   }
+  .medium-28 {
+    @apply text-[28px] font-[600] leading-[120%];
+  }
   .bold-88 {
     @apply text-[88px] font-[700] leading-[120%];
   }

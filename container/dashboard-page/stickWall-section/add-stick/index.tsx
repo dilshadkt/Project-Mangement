@@ -51,7 +51,7 @@ const AddStick = () => {
     <Drawyer
       id="drawer"
       position="drawer-end"
-      className="w-[500px] flexCenter flex-col px-5"
+      className="w-full md:w-[500px] flexCenter flex-col px-5"
     >
       <Image
         src={"/svg/logo.svg"}

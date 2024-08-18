@@ -79,9 +79,9 @@ const DrawerSection = ({
     <div
       className={` ${
         isPromptBoxOpen
-          ? ` w-[50%] ml-5  `
+          ? ` w-full md:w-[50%] ml-0 md:ml-5  `
           : `scale-0 w-0 overflow-hidden hidden`
-      } flex-initial  flex flex-col min-w-[450px] max-w-[450px]  p-5 px-6  shadow-md border border-gray-200/20  bg-sidebarGray h-[90vh] rounded-xl transition-all duration-500`}
+      } flex-initial  flex flex-col  min-w-[380px] md:min-w-[450px] max-w-[450px]  p-5 px-6  shadow-md border border-gray-200/20  bg-sidebarGray h-[90vh] rounded-xl transition-all duration-500`}
     >
       <div className="flexBetween">
         <h4 className="text-textGray font-semibold">Ask Ai to shedule :</h4>

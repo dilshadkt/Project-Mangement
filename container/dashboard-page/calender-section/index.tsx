@@ -27,12 +27,12 @@ const CalenderSection = () => {
   };
 
   return (
-    <section className="text-sm flex w-full flex-col h-full">
+    <section className="text-sm flex w-full flex-col overflow-hidden h-full">
       <div className="flex-1 flex flex-col">
         <Header heading="Timer" />
       </div>
       <div className="h-full flexCenter flex-col">
-        <div className="p-10 rounded-lg bg-gray-100 min-w-[460px] flexCenter relative  shadow-md border">
+        <div className="p-10 rounded-lg bg-gray-100 w-5/6  md:w-fit md:min-w-[460px] flexCenter relative  shadow-md border">
           <Image
             src={"/images/paper.jpg"}
             alt="paper texture"
@@ -53,7 +53,7 @@ const CalenderSection = () => {
             height={20}
             className="absolute z-40 -rotate-45 -top-5 -left-10"
           />
-          <h3 className="text-9xl relative z-30 font-bold [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
+          <h3 className=" text-6xl md:text-9xl relative z-30 font-bold [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
             {formatTime(time as number)}
           </h3>
         </div>

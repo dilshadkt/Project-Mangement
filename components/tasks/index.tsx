@@ -99,7 +99,7 @@ const Tasks = ({
     <div
       className={` ${
         taskOpen
-          ? ` w-[50%] ml-5 p-5 px-6 `
+          ? ` w-full md:w-[50%] ml-5 p-5 px-6 `
           : `translate-x-[100%] w-0 overflow-hidden`
       } flex-initial  flex flex-col max-w-[450px]  shadow-md border border-gray-200/20  bg-sidebarGray h-full rounded-xl transition-all duration-500`}
     >

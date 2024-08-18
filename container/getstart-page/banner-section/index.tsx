@@ -3,7 +3,7 @@ import React from "react";
 
 const BannerSection = () => {
   return (
-    <div className="w-full bg-gray-900 h-full text-red-300 rounded-xl flexCenter relative">
+    <div className="hidden md:flexCenter w-full bg-gray-900 h-full text-red-300 rounded-xl  relative">
       <h4 className="absolute top-0 left-0 text-white font-semibold m-5  text-2xl">
         Organic <br /> Mind
       </h4>

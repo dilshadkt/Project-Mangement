@@ -59,7 +59,7 @@ const FormSection = () => {
   };
 
   return (
-    <section className="h-full shadow-md border  hide-scrollbar bg-gradient-to-r from-white to-gray-100 relative  p-5 mt-3 rounded-lg">
+    <section className="h-full shadow-md border overflow-y-auto  hide-scrollbar bg-gradient-to-r from-white to-gray-100 relative  p-5 mt-3 rounded-lg">
       <Image
         src={"/images/paper.jpg"}
         alt="paper-texture"
@@ -67,8 +67,8 @@ const FormSection = () => {
         height={300}
         className="absolute w-full  top-0 object-cover h-full overflow-hidden left-0 right-0 bottom-0 opacity-50"
       />
-      <div className="flex flex-col overflow-y-auto  h-full">
-        <div className="grid grid-cols-2 h-full">
+      <div className="flex flex-col overflow-y-auto hide-scrollbar  h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-full mb-20 md:mb-0">
           <div>
             <form className="relative z-40">
               <label htmlFor="firstName" className="font-medium text-gray-900">
@@ -152,7 +152,11 @@ const FormSection = () => {
             </div>
           </div>
 
-          <div className="w-full bg-[#C5B9A6] overflow-hidden mt-5 border max-h-[250px] rotate-6 hover:rotate-0 transition-all duration-300 origin-top-left border-gray-200 relative shadow-md rounded-lg p-5">
+          <div
+            className="w-full bg-[#C5B9A6] overflow-hidden mt-5 border h-full md:max-h-[250px]
+             md:rotate-6 hover:rotate-0 transition-all
+           duration-300 origin-top-left border-gray-200 relative shadow-md rounded-lg p-5"
+          >
             <Image
               src={"/images/paper.jpg"}
               width={300}
@@ -182,12 +186,10 @@ const FormSection = () => {
               alt="post"
               width={200}
               height={200}
-              className="absolute -bottom-10 -right-20 opacity-40"
+              className="absolute w-[120px] md:w-[200px] -bottom-10 right-0 md:-right-20 opacity-40"
             />
           </div>
         </div>
-
-        <div></div>
       </div>
     </section>
   );

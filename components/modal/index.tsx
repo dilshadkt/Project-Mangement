@@ -78,9 +78,9 @@ const Modal = ({ stickId }: { stickId: string }) => {
     setValue(activeStick.desc);
   }, [activeStick]);
   return (
-    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+    <dialog id="my_modal_5" className="modal md:modal-bottom modal-middle">
       <div
-        className="bg-[#f2d948]  modal-box max-h-[470px]  w-2/6  min-h-[400px] shadow-lg  z-30
+        className="bg-[#f2d948]  modal-box max-h-[470px] w-5/6  md:w-2/6  min-h-[400px] shadow-lg  z-30
                   rigin-top-left transition-all duration-200 cursor-pointer group p-4 pt-6  overflow-hidden rounded-md  relative"
       >
         <Image

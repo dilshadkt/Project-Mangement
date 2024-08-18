@@ -68,7 +68,7 @@ const Calender = () => {
         {[...Array(daysInMonth).keys()].map((i) => (
           <div
             key={i}
-            className="text-center text-sm p-2 flexCenter hover:bg-[#1D9385] cursor-pointer hover:text-white rounded-xl"
+            className="text-center  text-sm p-2 flexCenter hover:bg-[#1D9385] cursor-pointer hover:text-white rounded-xl"
           >
             {i + 1}
           </div>

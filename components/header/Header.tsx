@@ -11,7 +11,7 @@ const Header = ({ heading, value }: { heading: string; value?: number }) => {
   return (
     <div className="text-gray-800 flexBetween">
       <div className="flex">
-        <h3 className="medium-40  [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500 ">
+        <h3 className=" medium-28 md:medium-40  [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500 ">
           {heading}
         </h3>
 

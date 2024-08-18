@@ -29,8 +29,22 @@ const StickWallSection = () => {
     <section className="relative mt-8 w-full h-full  border shadow-md rounded-xl border-gray-200   overflow-hidden ">
       <div
         ref={parent}
-        className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  2xl:grid-cols-4 gap-5  p-5"
+        className=" hidden  relative z-30 w-full h-full overflow-y-auto hide-scrollbar md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  2xl:grid-cols-4 gap-5  p-5"
       >
+        {tapes.map((item) => (
+          <StickPaper
+            setSelectedStick={setSelectedStick}
+            title={item?.title}
+            desc={item?.desc}
+            key={item?._id}
+            id={item?._id}
+          />
+        ))}
+
+        {/*STICK FOR CREATE NEW   */}
+        <AddPaper title={"item"} id="no-drag" />
+      </div>
+      <div className="relative z-30 w-full h-full overflow-y-auto hide-scrollbar grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  2xl:grid-cols-4 gap-5  p-5">
         {tapes.map((item) => (
           <StickPaper
             setSelectedStick={setSelectedStick}

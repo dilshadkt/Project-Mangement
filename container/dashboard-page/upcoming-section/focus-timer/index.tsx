@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 const FoucusTimer = () => {
   const [timer, setCounter] = useState(30);
   return (
-    <div className="bg-gray-100 overflow-hidden relative   rounded-xl col-span-3  shadow-xl ">
+    <div className="bg-gray-100 min-h-[300px] overflow-hidden relative   rounded-xl col-span-4 lg:col-span-3  shadow-xl ">
       <div className="relative z-40 p-7">
         <h4 className="text-2xl font-semibold [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-gray-500">
           Foucus Timer
@@ -36,7 +36,7 @@ const FoucusTimer = () => {
         </div>
         <ActionButton
           text="Start"
-          ButtonStyle="mt-5 rounded-full   bg-gray-700/30 hover:bg-gray-700/80 transition-all duration-300 text-white"
+          ButtonStyle="mt-5 rounded-full bg-gray-700/30 hover:bg-gray-700/80 transition-all duration-300 text-white"
         />
       </div>
       <Image

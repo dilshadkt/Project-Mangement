@@ -77,7 +77,7 @@ const Sidbar = () => {
   return (
     <>
       <section
-        className={`bg-sidebarGray rounded-xl flex  w-[330px]  flex-col  p-4 h-full  ${
+        className={`bg-sidebarGray rounded-xl   hidden md:flex w-[330px]  flex-col  p-4 h-full  ${
           sideBarOpen ? `translate-x-0 ` : `-translate-x-[120%] absolute  `
         } transition-all duration-300 ease-in`}
       >
