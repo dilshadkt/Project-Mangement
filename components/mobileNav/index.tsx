@@ -30,7 +30,7 @@ const MobileNavbar = () => {
 
   return (
     <section
-      className={`fixed h-[75px] bg-white shadow-md bottom-0 w-full left-0 right-0 z-50 transition-transform duration-300 ${
+      className={`fixed h-[75px] md:hidden bg-white shadow-md bottom-0 w-full left-0  right-0 z-50 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
     >
@@ -54,7 +54,7 @@ const MobileNavbar = () => {
               <div
                 className={` ${
                   pathName === item.path && "translate-y-7 blur-md  "
-                } absolute bg-black w-[80%] h-[80%]  -z-20  transition-all duration-500 rounded-xl left-0 right-0 bottom-0 top-0 m-auto`}
+                } absolute bg-black w-[67%] sm:w-[50%] h-[80%]  -z-20  transition-all duration-500 rounded-xl left-0 right-0 bottom-0 top-0 m-auto`}
               ></div>
             </li>
           </Link>
