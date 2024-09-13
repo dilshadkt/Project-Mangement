@@ -4,6 +4,8 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import _ from "lodash";
+import { setUserData } from "@/libs/features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 interface initialDataProps {
   firstName: string;
@@ -15,6 +17,7 @@ const FormSection = () => {
   const [initialData, setInitialData] = useState<initialDataProps | null>();
   const [error, setError] = useState<string | null>(null);
   const firstNameRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
     setEdit(false);
@@ -45,6 +48,7 @@ const FormSection = () => {
     if (!_.isEqual(initialData, currentData)) {
       const res = await updateUser(currentData);
       setInitialData({ ...(res as initialDataProps) });
+      dispatch(setUserData({ name: res?.firstName }));
       setEdit(true);
     } else {
       return setError("Change any field");
